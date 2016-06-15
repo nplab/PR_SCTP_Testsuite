@@ -1,0 +1,2 @@
+sysctl -a net.inet.sctp
+sysctl -w net.inet.sctp.nrsack_enable=0/1
