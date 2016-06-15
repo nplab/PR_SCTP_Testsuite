@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Suite for the SCTP Partial Reliability Extension</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		body {
+			margin: 10px 100px 10px 20px;
+		}
+		h1 {
+			margin: 20px 0px;
+		}
+		h2 {
+			margin: 15px 10px;
+		}
+		h3 {
+			margin: 12px 15px;
+		}
+		ul {
+			padding: 2em;
+   			list-style-type: disc;
+   			list-style-position: outside;
+   			list-style-image: none;
+		}
+	
+		ol {
+			list-style-type: upper-roman; 
+			padding: 1em 2em;
+		}
+	
+		#abbreviation_table {
+			border-collapse: collapse;
+		}
+
+		#abbreviation_table td {
+			border: 1px solid black;
+			padding: 10px;
+		}
+	</style>
+  </head>
+  <body>
+	<h1>Introduction</h1>
+	<p>This is a html document that describes the test suite for the partial reliability extension of sctp.
+	   It is current work in progress and later this introduction will be a general description of the 
+       designed test suite.
+	</p>
+	<h2>Abbreviations</h2>
+	<table id="abbreviation_table">
+		<tbody>
+			<tr>
+				<td>SCTP</td>
+				<td>Stream Control Transmission Protocol</td>
+			</tr>
+			<tr>
+				<td>PR-SCTP</td>
+				<td>Partial Reliability Extension for SCTP</td>
+			</tr>
+			<tr>
+				<td>SUT</td>
+				<td>System under Test</td>
+			</tr>
+			<tr>
+				<td>IUT</td>
+				<td>Implementation under Test</td>
+			</tr>
+			<tr>
+				<td>V</td>
+				<td>Valid Behaviour</td>
+			</tr>
+			<tr>
+				<td>I</td>
+				<td>Invalid Behaviour</td>
+			</tr>
+			<tr>
+				<td>O</td>
+				<td>Inopportune behaviour</td>
+			</tr>
+			<tr>
+				<td>TSN</td>
+				<td>Transmission Sequence Number</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h2>External references</h2>
+	This testsuite is based upen the following documents:
+
+	<ul>	
+		<li><a href="https://tools.ietf.org/html/rfc4960">RFC 4960 (SCTP)</a></li>
+		<li><a href="https://www.ietf.org/rfc/rfc3758.txt">RFC 3758 (PR-SCTP)</a></li>
+		<li><a href="https://www.ietf.org/rfc/rfc6458.txt">RFC 6458 (Sockets API Extensions for SCTP)</a></li>
+		<li><a href="https://www.ietf.org/rfc/rfc7496.txt">RFC 7496 (Additional Policies for SCTP)</a></li>
+		<li><a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-05">Internet Draft - Stream Schedulers and User Message Interleaving for SCTP</a></li>
+		<li><a href="https://tools.ietf.org/html/draft-tuexen-tsvwg-sctp-multipath-05">Internet Draft - Load Sharing for SCTP</a></li>
+	</ul>
+	
+	<h1>Overview of Test-Suite-Structure</h2>
+	<ol>
+		<li>Negotiation of Forward-TSN-supported parameter</li>
+		<li>Sender Side Implementation</li>
+		<li>Receiver Side Implementation</li>
+		<li>Additional Policies</li>
+		<li>Corner cases and error conditions</li>
+	</ol>
+	
+	<h1>Definition of Test-Suite</h1>
+	<h2>Negotiation of Forward-TSN-supported parameter</h2>
+	
+  </body>
+</html>
