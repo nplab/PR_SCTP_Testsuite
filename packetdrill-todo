@@ -1,0 +1,6 @@
+features in packetdrill required for implementing the pr-sctp testsuite:
+	- support for optional forward-tsn-supported parameter at INIT and INIT-ACK chunk
+	- FORWARD TSN Chunk
+	- NR-SACK Chunk
+	- system-call-api for pr-sctp (?? done by jens hölscher ??)
+	- 
