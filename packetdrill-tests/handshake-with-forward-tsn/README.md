@@ -8,5 +8,5 @@
 | handshake-with-forward-tsn-4                   | Yes           | Yes                 | No                |        |
 | handshake-with-forward-tsn-5                   | Yes           | Yes                 | No                |        |
 | handshake-with-forward-tsn-6                   | Yes           | No                  | No                |        |
-| handshake-with-forward-tsn-7                   | No            | No                  | No                |        |
-| handshake-with-forward-tsn-operational-error   | No            | No                  | No                |        |
+| handshake-with-forward-tsn-7                   | Yes           | No                  | No                |        |
+| handshake-with-forward-tsn-operational-error   | Yes           | Yes                 | No                |        |
