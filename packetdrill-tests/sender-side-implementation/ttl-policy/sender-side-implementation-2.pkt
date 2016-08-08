@@ -13,7 +13,9 @@
 #endif
 
 #ifdef Linux
-// TODO: find a way to only enable PR-SCTP on linux for this test case ...
+// only enable PR-SCTP extension on Linux
+ 0.0 `sysctl -ew net.sctp.auth_enable=0`
++0.0 `sysctl -ew net.sctp.prsctp_enable=1`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
@@ -21,9 +23,16 @@
 +0.0 fcntl(3, F_SETFL, O_RDWR|O_NONBLOCK) = 0
 +0.0 bind(3, ..., ...) = 0
 +0.1 connect(3, ..., ...) = -1 EINPROGRESS (Operation now in progress)
+#ifdef FreeBSD
 +0.0 > sctp: INIT[flgs=0, tag=1, a_rwnd=..., os=..., is=..., tsn=1, FORWARD_TSN_SUPPORTED[], 
                                                                     SUPPORTED_EXTENSIONS[types=[0xc0]], 
                                                                     SUPPORTED_ADDRESS_TYPES[types=[IPv4]]]
+#endif
+#ifdef Linux
++0.0 > sctp: INIT[flgs=0, tag=1, a_rwnd=..., os=..., is=..., tsn=1, SUPPORTED_ADDRESS_TYPES[types=[IPv4]], 
+                                                                    ECN_CAPABLE[], 
+                                                                    FORWARD_TSN_SUPPORTED[]]
+#endif
 +0.1 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=1500, os=16, is=16, tsn=1, STATE_COOKIE[len=4, val=...],
                                                                        FORWARD_TSN_SUPPORTED[]]
 +0.0 > sctp: COOKIE_ECHO[flgs=0, len=4, val=...]
@@ -39,7 +48,7 @@
 +0.0 > sctp: DATA[flgs=U, len=1468, tsn=2, sid=0, ssn=0, ppid=1234]
 +0.0 > sctp: DATA[flgs=UE, len=112, tsn=3, sid=0, ssn=0, ppid=1234]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[2:2], dups=[]]
-// TODO: why +0.8 secs and not 0.3?
+// expect outgoing forward-tsn-chunk with cum_tsn=3 and no stream_identifier and stream_sequencer_number set
 +0.8 > sctp: FORWARD_TSN[cum_tsn=3, ids=[]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], dups=[]]
 // check if the cwnd at the IUT did not advance and is 2...
