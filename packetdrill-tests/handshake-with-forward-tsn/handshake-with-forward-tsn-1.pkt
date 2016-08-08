@@ -13,7 +13,9 @@
 #endif
 
 #ifdef Linux
-// TODO: find a way to disable PR-SCTP on linux for this test case ...
+// disable all extensions including PR-SCTP on Linux
+ 0.0 `sysctl -ew net.sctp.auth_enable=0`
++0.0 `sysctl -ew net.sctp.prsctp_enable=0`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
@@ -21,10 +23,16 @@
 +0.0 listen(3, 1) = 0
 +0.0 < sctp: INIT[flgs=0, tag=1, a_rwnd=1500, os=1, is=1, tsn=0,
                   FORWARD_TSN_SUPPORTED[]]
+#ifdef FreeBSD
 // TODO: this chunk is on the wire and is acceptable... 
 // although it should be listed at the unrecognized parameters regarding RFC 3758 sec. 3.3.2?
 +0.0 > sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=..., os=..., is=..., tsn=1, 
                                                  STATE_COOKIE[len=..., val=...]]
+#endif
+#ifdef Linux
++0.0 > sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=..., os=..., is=..., tsn=1, STATE_COOKIE[len=..., val=...], 
+                                                                        UNRECOGNIZED_PARAMETER[params=[FORWARD_TSN_SUPPORTED[]]]]
+#endif
 +0.1 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4

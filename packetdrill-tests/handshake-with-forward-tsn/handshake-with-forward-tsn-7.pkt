@@ -13,7 +13,9 @@
 #endif
 
 #ifdef Linux
-// TODO: find a way to only enable PR-SCTP extension ...
+// only enable PR-SCTP extension on Linux
+ 0.0 `sysctl -ew net.sctp.auth_enable=0`
++0.0 `sysctl -ew net.sctp.prsctp_enable=1`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
