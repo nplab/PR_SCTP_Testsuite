@@ -50,7 +50,12 @@
 +0.0 > sctp: DATA[flgs=E, len=112, tsn=3, sid=1, ssn=0, ppid=1234]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[2:2], dups=[]]
 // expect outgoing forward-tsn-chunk with cum_tsn=3, stream_identifier=1 and stream_seq_number=0
+#ifdef FreeBSD
++0.8 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,0}, {1, 0}]]
+#endif
+#ifdef Linux
 +0.8 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,0}]]
+#endif
 +0.1 < sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], dups=[]]
 // check if the cwnd at the IUT did not advance and is 2...
 +0.0 sctp_sendmsg(3, ..., 3000, ..., ..., htonl(1234), 0, 1, 500, 0) = 3000
