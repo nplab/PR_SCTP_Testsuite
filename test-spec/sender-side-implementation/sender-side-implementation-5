@@ -1,8 +1,9 @@
 Precondition:
 IUT supports PR-SCTP. 
 Association where PR-SCTP is enabled is established between tester and IUT.
-Let the IUT send a single user message in three DATA-Chunks, each in its own packet. Send a SACK for the first two DATA-Chunks at the tester. 
-Then wait so long until the T3-rtx timer of the sender expires and flags the third DATA-Chunk as abandoned.
+Let the IUT send a single unordered not fragmented user message in one DATA-Chunk.
+Don't send a SACK for the user message and wait so long until the T3-rtx timer of 
+the sender expires and flags the DATA-Chunk as abandoned.
 
 Purpose:
 Ensure that the IUT sends a valid FORWARD TSN-Chunk and does not delay the sending of the forward tsn to more than 500ms. 
