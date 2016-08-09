@@ -1,7 +1,7 @@
 Precondition:
 IUT supports PR-SCTP. 
 Association where PR-SCTP is enabled is established between tester and IUT.
-Let the IUT send three not fragmented user messages in four DATA-Chunks.
+Let the IUT send three not fragmented unordered user messages in three DATA-Chunks.
 Arrange the data such that the IUT will abandon the second user message before the third user message.
 Send a SACK for the first DATA-Chunk at the tester. 
 Then wait so long until the T3-rtx timer of the sender expires and flags the second DATA-Chunk as abandoned.
