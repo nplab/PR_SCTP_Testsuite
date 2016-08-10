@@ -93,7 +93,7 @@ class Testcase {
     }
     
     public function __toString() {
-        $table = HtmlNode::get_builder("table")->attribute("class", "test_case_table")->build();
+        $table = HtmlNode::get_builder("table")->attribute("class", "test_case_table")->attribute("id", $this->id)->build();
         $tbody = HtmlNode::get_builder("tbody")->build();
         $table->addChildNode($tbody);
         
@@ -227,7 +227,7 @@ foreach ($test_suites as $test_suite) {
 			margin: 12px 15px;
 		}
 		ul {
-			padding: 2em;
+			padding: 1em 2em;
    			list-style-type: disc;
    			list-style-position: outside;
    			list-style-image: none;
@@ -314,8 +314,9 @@ foreach ($test_suites as $test_suite) {
             
             echo $ul;
         ?>
-	
+
 	<h1>Overview of Test-Suite-Structure</h2>
+<!--
 	<ol class="overview_ol">
 		<li>Negotiation of Forward-TSN-supported parameter</li>
 		<li>Sender Side Implementation</li>
@@ -323,7 +324,28 @@ foreach ($test_suites as $test_suite) {
 		<li>Additional Policies</li>
 		<li>Corner cases and error conditions</li>
 	</ol>
+-->
+
+	<?php
+		$ol = HtmlNode::get_builder("ol")->attribute("class", "overview_ol")->build();
+		foreach ($test_suites as $test_suite) {
+			$li = HtmlNode::get_builder("li")->s_text($test_suite->longName)->build();
+			$ol->addChildNode($li);
 	
+			$ul = HtmlNode::get_builder("ul")->build();
+			foreach ($test_suite->test_cases as $test_case) {
+				$li_child = HtmlNode::get_builder("li")->build();
+				$a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)
+                           ->s_text($test_case->id)->build();
+				$li_child->addChildNode($a_child);
+				$ul->addChildNode($li_child);
+			}
+			$li->addChildNode($ul);
+		}
+
+		echo $ol;
+		
+	?>
 	<h1>Definition of Test-Suite</h1>
         
 	<?php
