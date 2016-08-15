@@ -50,8 +50,15 @@
 +0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = 1000
 +0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), 0, 2, 500, 0) = 1000
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=3, sid=1, ssn=1, ppid=1234]
+#ifdef Linux
 * > sctp: FORWARD_TSN[cum_tsn=3, ids=[{2,0}, {1,1}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], dups=[]]
+#endif
+#ifdef FreeBSD
+* > sctp: FORWARD_TSN[cum_tsn=3, ids=[{2,0},{1,1}]]; 
+          DATA[flgs=BE, len=1016, tsn=4, sid=2, ssn=1, ppid=1234]
++0.1 < sctp: SACK[flgs=0, cum_tsn=4, a_rwnd=10000, gaps=[], dups=[]]
+#endif
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.1 < sctp: SHUTDOWN_ACK[flgs=0]

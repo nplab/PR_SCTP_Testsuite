@@ -10,6 +10,9 @@
 +0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
 +0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
 +0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -i net.inet.sctp.rto_min=1000`
++0.0 `sysctl -i net.inet.sctp.rto_initial=1000`
 #endif
 
 #ifdef Linux

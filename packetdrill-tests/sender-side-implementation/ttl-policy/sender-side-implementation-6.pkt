@@ -10,6 +10,9 @@
 +0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
 +0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
 +0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -i net.inet.sctp.rto_min=1000`
++0.0 `sysctl -i net.inet.sctp.rto_initial=1000`
 #endif
 
 #ifdef Linux
@@ -47,7 +50,7 @@
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
 // there should be a FORWARD_TSN for the outstanding DATA-Chunk, 
 // the user message with stream_no = 2 should be discarded at this point...
-+3.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
++1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.1 < sctp: SHUTDOWN_ACK[flgs=0]
