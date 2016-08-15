@@ -14,5 +14,5 @@
 | sender-side-implementation-10                  | Yes           | Yes                 | Yes               |
 
 # Notes
-1) The FreeBSD Kernel Implementation does not bundle the FORWARD-TSN-Chunk with the outstanding DATA-Chunk.
-2) The Linux Kernel Implementation does not immediately retransmit the outstanding DATA-Chunk after receival of SACK-Chunk.
+1. The FreeBSD Kernel Implementation does not bundle the FORWARD-TSN-Chunk with the outstanding DATA-Chunk.
+2. The Linux Kernel Implementation does not immediately retransmit the outstanding DATA-Chunk after receival of SACK-Chunk.
