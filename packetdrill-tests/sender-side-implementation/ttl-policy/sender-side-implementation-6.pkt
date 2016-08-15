@@ -19,6 +19,9 @@
 // only enable PR-SCTP extension on Linux
  0.0 `sysctl -ew net.sctp.auth_enable=0`
 +0.0 `sysctl -ew net.sctp.prsctp_enable=1`
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -ew net.sctp.rto_min=1000`
++0.0 `sysctl -ew net.sctp.rto_initial=1000`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3

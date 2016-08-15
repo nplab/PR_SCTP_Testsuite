@@ -19,6 +19,9 @@
 // only enable PR-SCTP extension on Linux
  0.0 `sysctl -ew net.sctp.auth_enable=0`
 +0.0 `sysctl -ew net.sctp.prsctp_enable=1`
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -ew net.sctp.rto_min=1000`
++0.0 `sysctl -ew net.sctp.rto_initial=1000`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
@@ -51,7 +54,9 @@
 +1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]; 
              DATA[flgs=BE, len=1016, tsn=2, sid=2, ssn=0, ppid=1234]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
+#ifdef FreeBSD
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=2, ssn=0, ppid=1234]
+#endif
 +2.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{2,0}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +1.0 close(3) = 0
