@@ -211,7 +211,7 @@ foreach ($test_suites as $test_suite) {
     $test_suite->test_cases = loadTestCases($test_suite->folderName);
 }
 
-uasort($test_suites[1]->test_cases, sort_by_testcase_id);
+uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
 
 
 ?>
