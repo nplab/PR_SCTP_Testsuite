@@ -195,11 +195,23 @@ $test_suites = array(
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.')
 );
 
+function sort_by_testcase_id ($a, $b) {
+	$regex = '!\d+!';
+	$matches_a = array();
+	$matches_b = array();
+	preg_match_all($regex, $a->id, $matches_a);
+	preg_match_all($regex, $b->id, $matches_b);
+
+	return $matches_a[0] > $matches_b[0];
+}
+
 $all_test_cases = array();
 
 foreach ($test_suites as $test_suite) {
     $test_suite->test_cases = loadTestCases($test_suite->folderName);
 }
+
+uasort($test_suites[1]->test_cases, sort_by_testcase_id);
 
 
 ?>
