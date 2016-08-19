@@ -87,8 +87,8 @@
 +1.0 > sctp: DATA[flgs=BE, len=1017, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 // The following would be optimal:
-//+1.0 > sctp: FORWARD_TSN[cum_tsn=7, ids=[{1,0}]];
-//             DATA[flgs=BE, len=1017, tsn=8, sid=1, ssn=1, ppid=1234]
+//+1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]];
+//             DATA[flgs=BE, len=1017, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +0.0 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,2}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], dups=[]]

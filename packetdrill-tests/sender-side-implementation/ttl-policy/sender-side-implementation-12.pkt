@@ -33,7 +33,7 @@
                                                                     ECN_CAPABLE[], 
                                                                     FORWARD_TSN_SUPPORTED[]]
 #endif
-+0.1 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=1500, os=16, is=16, tsn=1, STATE_COOKIE[len=4, val=...],
++0.1 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=15000, os=16, is=16, tsn=1, STATE_COOKIE[len=4, val=...],
                                                                        FORWARD_TSN_SUPPORTED[]]
 +0.0 > sctp: COOKIE_ECHO[flgs=0, len=4, val=...]
 +0.1 < sctp: COOKIE_ACK[flgs=0]
@@ -83,10 +83,10 @@
 +0.0 > sctp: DATA[flgs=BE, len=1017, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=3, sid=1, ssn=2, ppid=1234]
 +0.6 < sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=10000, gaps=[0:0,2:2], dups=[]]
-+0.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,1}]]
-+0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
-+0.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,2}]]
++0.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
++1.0 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,2}]]
++0.1 < sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], dups=[]]
 #endif
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
