@@ -66,8 +66,8 @@ class Testsuite {
         $this->notice = $notice;
     }
 
-	public function __toString() {
-		$html = "";
+    public function __toString() {
+        $html = "";
         $html .= HtmlNode::get_builder("h2")->text($this->longName)->build();
 
         if (!empty($this->notice)) {
@@ -77,9 +77,10 @@ class Testsuite {
         foreach ($this->test_cases as $test_case) {
             $html .= $test_case;
         }
-	
-		return $html;
-	}
+
+        return $html;
+    }
+
 }
 
 class Testcase {
@@ -195,14 +196,14 @@ $test_suites = array(
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.')
 );
 
-function sort_by_testcase_id ($a, $b) {
-	$regex = '!\d+!';
-	$matches_a = array();
-	$matches_b = array();
-	preg_match_all($regex, $a->id, $matches_a);
-	preg_match_all($regex, $b->id, $matches_b);
+function sort_by_testcase_id($a, $b) {
+    $regex = '!\d+!';
+    $matches_a = array();
+    $matches_b = array();
+    preg_match_all($regex, $a->id, $matches_a);
+    preg_match_all($regex, $b->id, $matches_b);
 
-	return $matches_a[0] > $matches_b[0];
+    return $matches_a[0] > $matches_b[0];
 }
 
 $all_test_cases = array();
@@ -212,7 +213,6 @@ foreach ($test_suites as $test_suite) {
 }
 
 uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
-
 
 ?>
 <!doctype html>
@@ -339,31 +339,30 @@ uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
 -->
 
 	<?php
-		$ol = HtmlNode::get_builder("ol")->attribute("class", "overview_ol")->build();
-		foreach ($test_suites as $test_suite) {
-			$li = HtmlNode::get_builder("li")->s_text($test_suite->longName)->build();
-			$ol->addChildNode($li);
-	
-			$ul = HtmlNode::get_builder("ul")->build();
-			foreach ($test_suite->test_cases as $test_case) {
-				$li_child = HtmlNode::get_builder("li")->build();
-				$a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)
-                           ->s_text($test_case->id)->build();
-				$li_child->addChildNode($a_child);
-				$ul->addChildNode($li_child);
-			}
-			$li->addChildNode($ul);
-		}
+        $ol = HtmlNode::get_builder("ol")->attribute("class", "overview_ol")->build();
+        foreach ($test_suites as $test_suite) {
+            $li = HtmlNode::get_builder("li")->s_text($test_suite->longName)->build();
+            $ol->addChildNode($li);
 
-		echo $ol;
+            $ul = HtmlNode::get_builder("ul")->build();
+            foreach ($test_suite->test_cases as $test_case) {
+                $li_child = HtmlNode::get_builder("li")->build();
+                $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
+                $li_child->addChildNode($a_child);
+                $ul->addChildNode($li_child);
+            }
+            $li->addChildNode($ul);
+        }
+
+        echo $ol;
 		
 	?>
 	<h1>Definition of Test-Suite</h1>
         
 	<?php
-		foreach ($test_suites as $test_suite) {
-			echo $test_suite;
-		}
-	?>
+        foreach ($test_suites as $test_suite) {
+            echo $test_suite;
+        }
+        ?>
   </body>
 </html>
