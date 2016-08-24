@@ -193,7 +193,8 @@ function loadTestCases($suite_folder_name) {
 $test_suites = array(
     new Testsuite("nftsp", "negotiation-forward-tsn-supported-parameter", "Negotiation of Forward-TSN-supported parameter"),
     new Testsuite("ssi", "sender-side-implementation", "Sender Side Implementation", 'These test cases use the term "abandoned" like defined in <a href="https://tools.ietf.org/html/rfc3758#section-3.4">RFC 3758 [section 3.4]</a>. 
-                                    This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.')
+                                    This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.'),
+    new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation"),
 );
 
 function sort_by_testcase_id($a, $b) {
