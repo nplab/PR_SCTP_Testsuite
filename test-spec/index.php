@@ -328,7 +328,7 @@ uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
             echo $ul;
         ?>
 
-	<h1>Overview of Test-Suite-Structure</h2>
+	<h1>Overview of Test-Suite-Structure</h1>
 <!--
 	<ol class="overview_ol">
 		<li>Negotiation of Forward-TSN-supported parameter</li>
