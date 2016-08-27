@@ -3,6 +3,12 @@ require_once "config.php";
 ini_set('include_path', $includePath);
 
 require_once "HtmlBuilder.php";
+require_once "Indentation.php";
+
+//\Nodes\Indentation::$indentationCharacter = " ";
+//\Nodes\Indentation::$indentationDepth = 2;
+//\Nodes\Indentation::$lineBreaker = "\n";
+
 use \Nodes\HtmlNode as HtmlNode;
 
 error_reporting(E_ALL);
@@ -214,6 +220,7 @@ foreach ($test_suites as $test_suite) {
 }
 
 uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
+uasort($test_suites[2]->test_cases, "sort_by_testcase_id");
 
 ?>
 <!doctype html>
