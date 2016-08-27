@@ -49,7 +49,7 @@
 // send a FORWARD-TSN indicating that the user message is abandoned and will not be retrasmitted
 +0.0 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]]
 +0.1 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[], dups=[]]
-// check that sctp_recvmsg does NOT suceed and user message with sid=1, ssn=0 is discarded...
+// check that the user message with sid=1, ssn=0 is discarded...
 +0.0 < sctp: DATA[flgs=BE, len=1016, tsn=3, sid=1, ssn=1, ppid=0]
 +0.1 > sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[], dups=[]]
 +0.0 sctp_recvmsg(3, ..., 1000, ..., ..., ..., MSG_EOR) = 1000
