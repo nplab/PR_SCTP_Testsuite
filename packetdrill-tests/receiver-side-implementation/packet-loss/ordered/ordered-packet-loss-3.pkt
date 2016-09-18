@@ -64,11 +64,11 @@
 +0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
 +0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
 
-+0.0 < sctp: DATA[flgs=E, len=1016, tsn=2, sid=1, ssn=1, ppid=0]
++0.0 < sctp: DATA[flgs=E, len=1016, tsn=2, sid=1, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2], dups=[]]
-+0.1 < sctp: DATA[flgs=E, len=1016, tsn=4, sid=2, ssn=1, ppid=0]
++0.1 < sctp: DATA[flgs=E, len=1016, tsn=4, sid=2, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2, 4:4], dups=[]]
-+0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]]
++0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[2:2], dups=[]]
 +0.1 < sctp: DATA[flgs=B, len=1016, tsn=3, sid=2, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=4, a_rwnd=..., gaps=[], dups=[]]
