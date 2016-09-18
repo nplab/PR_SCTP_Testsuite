@@ -34,7 +34,6 @@ $abbreviations = array(
     new Abbreviation("O", "Inopportune behaviour"),
     new Abbreviation("TSN", "Transmission Sequence Number"),
     new Abbreviation("cwnd", "Congestion Window Size"),
-    new Abbreviation("yasa", "yet another silly abbreviation"),
 );
 
 uasort($abbreviations, function ($a, $b) {
