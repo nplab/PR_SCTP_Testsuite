@@ -21,8 +21,8 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 | [Socket API](socket-api/)                                                              |                        0 | In Progress   |
 
 ## FreeBSD Fixes
-* [r304837](https://svnweb.freebsd.org/changeset/base/304837).
 * [r303834](https://svnweb.freebsd.org/changeset/base/303834).
+* [r304837](https://svnweb.freebsd.org/changeset/base/304837).
 
 ## References
 * [Formal definition of test cases](https://xdcc.generals-hq.de/spec/)
