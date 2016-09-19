@@ -15,7 +15,7 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 | Test Group                                                                             |   Number of Test Scripts | Status        |
 | :------------------------------------------------------------------------------------- | :----------------------: | :-----------: |
 | [Handshake with Forward-TSN-supported Parameter](handshake-with-forward-tsn/)          |                        8 | Done          |
-| [Receiver Side Implementation](receiver-side-implementation/)                          |                       28 | In Progress   |
+| [Receiver Side Implementation](receiver-side-implementation/)                          |                       33 | In Progress   |
 | [Sender Side Implementation](sender-side-implementation/)                              |                       25 | In Progress   |
 | [Error Cases](error-cases/)                                                            |                        0 | In Progress   |
 | [Socket API](socket-api/)                                                              |                        0 | In Progress   |
