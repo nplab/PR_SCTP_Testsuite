@@ -74,8 +74,13 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2, 4:6], dups=[]]
 +0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]];
              FORWARD_TSN[cum_tsn=4, ids=[]]
+#ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[2:4], dups=[]]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
+#endif
+#ifdef FreeBSD
++0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
+#endif
 +0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
 // Tear down the association
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
