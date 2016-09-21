@@ -12,6 +12,8 @@
 | sender-side-implementation-8                   | Yes           | Yes                 | Yes               |
 | sender-side-implementation-9                   | Yes           | Yes                 | Yes               |
 | sender-side-implementation-10                  | Yes           | Yes                 | Yes               |
+| sender-side-implementation-11                  | Yes           | Yes                 | Yes               |
+| sender-side-implementation-12                  | Yes           | Yes                 | Yes               |
 
 # Notes
 1. The FreeBSD Kernel Implementation does not bundle the FORWARD-TSN-Chunk with the outstanding DATA-Chunk.
