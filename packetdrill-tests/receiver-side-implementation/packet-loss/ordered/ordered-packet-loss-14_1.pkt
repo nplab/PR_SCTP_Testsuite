@@ -64,15 +64,15 @@
 +0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
 +0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
 
-+0.0 < sctp: DATA[flgs=E, len=1016, tsn=8, sid=4, ssn=0, ppid=0]
++0.0 < sctp: DATA[flgs=E, len=1016, tsn=8, sid=1, ssn=3, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[8:8], dups=[]]
-+0.1 < sctp: DATA[flgs=B, len=1016, tsn=5, sid=3, ssn=0, ppid=0]
++0.1 < sctp: DATA[flgs=B, len=1016, tsn=5, sid=1, ssn=2, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[5:5, 8:8], dups=[]]
-+0.1 < sctp: DATA[flgs=E, len=1016, tsn=6, sid=3, ssn=0, ppid=0]
++0.1 < sctp: DATA[flgs=E, len=1016, tsn=6, sid=1, ssn=2, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[5:6, 8:8], dups=[]]
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
-+0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]];
-             DATA[flgs=B, len=1016, tsn=3, sid=2, ssn=0, ppid=0]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., ...) = -1
++0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]];
+             DATA[flgs=B, len=1016, tsn=3, sid=1, ssn=1, ppid=0]
 #ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[3:4, 6:6], dups=[]];
              SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[2:3, 5:5], dups=[]]
@@ -80,8 +80,8 @@
 #ifdef FreeBSD
 +0.0 > sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[2:3, 5:5], dups=[]]
 #endif
-+0.1 < sctp: FORWARD_TSN[cum_tsn=4, ids=[]];
-             DATA[flgs=B, len=1016, tsn=7, sid=4, ssn=0, ppid=0]
++0.1 < sctp: FORWARD_TSN[cum_tsn=4, ids=[{1,1}]];
+             DATA[flgs=B, len=1016, tsn=7, sid=1, ssn=3, ppid=0]
 #ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[2:2], dups=[]]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=8, a_rwnd=..., gaps=[], dups=[]]
@@ -89,6 +89,7 @@
 #ifdef FreeBSD
 +0.0 > sctp: SACK[flgs=0, cum_tsn=8, a_rwnd=..., gaps=[], dups=[]]
 #endif
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
 +0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
 // Tear down the association
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
