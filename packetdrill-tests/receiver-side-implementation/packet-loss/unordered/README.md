@@ -11,9 +11,16 @@
 | unordered-packet-loss-7                        | Yes           | Yes (Note 2)        | Yes               |
 | unordered-packet-loss-8                        | Yes           | Yes                 | Yes               |
 | unordered-packet-loss-9                        | Yes           | Yes                 | Yes               |
+| unordered-packet-loss-10                       | Yes           | Yes (Note 3)        | Yes               |
+| unordered-packet-loss-11                       | Yes           | Yes (Note 2)        | Yes               |
+| unordered-packet-loss-12                       | Yes           | Yes                 | Yes (Note 1)      |
+| unordered-packet-loss-13                       | Yes           | Yes (Note 4)        | Yes               |
+| unordered-packet-loss-14                       | Yes           | Yes (Note 2)        | Yes               |
 
 # Notes
 1. The Linux Kernel Implememtation sends correct but slightly out-of-date informations in the SACK-Chunk, because it seems
    to first process the FORwARD-TSN-Chunk and sends directly a SACK-CHUNK without looking at the bundled DATA-Chunk.
 2. The FreeBSD Kernel Implementation does not allow to receive the available user messages before the first fragmented user message was 
    fully received by the kernel.
+3. The FreeBSD Kernel Implementation sends an ABORT Chunk with the Cause Protocol Violation instead of a SACK Chunk in line 76.
+4. The FreeBSD Kernel Implementation does not allow to receive the user message at line 84.
