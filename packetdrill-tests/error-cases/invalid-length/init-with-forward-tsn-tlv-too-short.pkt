@@ -1,0 +1,28 @@
+--tolerance_usecs=250000
+#ifdef FreeBSD
+// enable only PR-SCTP on FreeBSD
+ 0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
++0.0 `sysctl -i net.inet.sctp.pr_enable=1`
++0.0 `sysctl -i net.inet.sctp.asconf_enable=0`
++0.0 `sysctl -i net.inet.sctp.pktdrop_enable=0`
++0.0 `sysctl -i net.inet.sctp.reconfig_enable=0`
++0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
+#endif
+
+#ifdef Linux
+// enable only PR-SCTP on Linux
+ 0.0 `sysctl -ew net.sctp.auth_enable=0`
++0.0 `sysctl -ew net.sctp.prsctp_enable=1`
+#endif
+
++0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
++0.0 bind(3, ..., ...) = 0
++0.0 listen(3, 1) = 0
+//                | flags|invalid length|         initiate tag  |       a_rwnd          | out_streams | in_streams |   
++0.0 < sctp: [0x01, 0x00,   0x00, 0x16,   0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x05, 0xdc, 0x00, 0x01  , 0x00, 0x01 , 
+//                   initial_tsn         | forward_tsn_supported 
+                   0x00, 0x00, 0x00, 0x01, 0xc0, 0x00, 0x00, 0x04 ]
++0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
