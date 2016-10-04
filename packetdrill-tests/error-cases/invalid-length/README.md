@@ -8,7 +8,7 @@
 | forward-tsn-too-short                          | Yes           | Yes (Note 3)        | Yes (Note 3)      |
 | i-forward-tsn-tlv-too-long                     | Yes           | Yes                 | -                 |
 | i-forward-tsn-tlv-too-short                    | Yes           | Yes (Note 2)        | -                 |
-| i-forward-tsn-too-short.pkt                    | Yes           | Yes                 | -                 |
+| i-forward-tsn-too-short                        | Yes           | Yes                 | -                 |
 | init-with-forward-tsn-tlv-too-long             | Yes           | Yes                 | Yes               |
 | init-with-forward-tsn-tlv-too-short            | Yes           | Yes (Note 4)        | Yes               |
 | init-with-forward-tsn-too-long                 | Yes           | Yes                 | Yes (Note 4)      |
