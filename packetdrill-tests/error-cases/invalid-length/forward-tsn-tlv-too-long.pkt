@@ -45,4 +45,10 @@
 // but set the length in the header to 12 bytes (0x0c)
 //                                  |      new cum_tsn     |
 +0.0 < sctp: [0xc0, 0x00 ,0x00, 0x0c, 0x00, 0x00,0x00, 0x01]
+#ifdef FreeBSD
++1.0 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]]
++0.1 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[], dups=[]]
+#endif
+#ifdef Linux
 +0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
+#endif

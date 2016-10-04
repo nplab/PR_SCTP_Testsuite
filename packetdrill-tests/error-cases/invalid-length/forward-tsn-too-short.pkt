@@ -42,5 +42,11 @@
 +0.0 setsockopt(3, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
 
 //                                                      new cum_tsn     |   sid_1   |   missing ssn_1     
-+0.0 < sctp: CHUNK[type=192, flgs=0, len=10, val=[0x00, 0x00, 0x00, 0x01, 0x00, 0x01]]
++0.0 < sctp: CHUNK[type=192, flgs=0, len=4, val=[]]
+#ifdef FreeBSD
++1.0 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]]
++0.1 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[], dups=[]]
+#endif
+#ifdef Linux
 +0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
+#endif
