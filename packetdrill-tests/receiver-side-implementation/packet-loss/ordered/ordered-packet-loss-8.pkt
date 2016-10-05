@@ -112,10 +112,6 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=16, a_rwnd=..., gaps=[], dups=[]]
 // Tear down the association
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
-#ifdef Linux
-// why do we get another SACK-Chunk here at Linux?
-+0.0 > sctp: SACK[flgs=0, cum_tsn=16, a_rwnd=..., gaps=[], dups=[]]
-#endif
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
 +0.0 close(4) = 0
