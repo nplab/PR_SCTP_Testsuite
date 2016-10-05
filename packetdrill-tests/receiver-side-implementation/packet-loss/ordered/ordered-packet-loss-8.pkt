@@ -68,48 +68,48 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2], dups=[]]
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=3, sid=2, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:3], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=4, sid=2, ssn=1, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:4], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=5, sid=2, ssn=2, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:5], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=6, sid=2, ssn=3, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:6], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=7, sid=2, ssn=4, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:7], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=8, sid=2, ssn=5, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:8], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=9, sid=2, ssn=6, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:9], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=10, sid=2, ssn=7, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:10], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=11, sid=2, ssn=8, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:11], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=12, sid=2, ssn=9, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:12], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=13, sid=2, ssn=10, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:13], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=14, sid=2, ssn=11, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:14], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=15, sid=2, ssn=12, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:15], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=16, sid=2, ssn=13, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:16], dups=[]]
++0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 +0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=16, a_rwnd=..., gaps=[], dups=[]]
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 1000
 // Tear down the association
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 #ifdef Linux
