@@ -2,7 +2,7 @@
 
 | Name                                                                           | Implemented | Finalized FreeBSD | Finalized Linux |
 |:------------------------------------------------------------------------------:|:-----------:|:-----------------:|:---------------:|
-| [forward-tsn-tlv-too-long](forward-tsn-tlv-too-long.pkt)                       | Yes         | Yes               | Yes             |
+| [forward-tsn-tlv-too-long](forward-tsn-tlv-too-long.pkt)                       | Yes         | Yes (Note 1)      | Yes             |
 | [forward-tsn-tlv-too-short](forward-tsn-tlv-too-short.pkt)                     | Yes         | Yes (Note 2)      | Yes (Note 2)    |
 | [forward-tsn-too-short](forward-tsn-too-short.pkt)                             | Yes         | Yes               | Yes             |
 | [i-forward-tsn-tlv-too-long](i-forward-tsn-tlv-too-long.pkt)                   | Yes         | Yes               | -               |
