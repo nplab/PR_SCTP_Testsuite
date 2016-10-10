@@ -80,7 +80,7 @@
 #ifdef FreeBSD
 +0.0 > sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[2:3, 5:5], dups=[]]
 #endif
-+0.1 < sctp: FORWARD_TSN[cum_tsn=4, ids=[]];
++0.1 < sctp: FORWARD_TSN[cum_tsn=4, ids=[{2,0}]];
              DATA[flgs=B, len=1016, tsn=7, sid=4, ssn=0, ppid=0]
 #ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[2:2], dups=[]]

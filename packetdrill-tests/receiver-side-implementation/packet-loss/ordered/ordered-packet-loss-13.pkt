@@ -72,8 +72,8 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2, 4:4, 6:6], dups=[]]
 +0.1 < sctp: DATA[flgs=B, len=1016, tsn=5, sid=3, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2, 4:6], dups=[]]
-+0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]];
-             FORWARD_TSN[cum_tsn=4, ids=[]]
++0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]];
+             FORWARD_TSN[cum_tsn=4, ids=[{2,0}]]
 #ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[2:4], dups=[]]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
