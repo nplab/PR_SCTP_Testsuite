@@ -70,6 +70,10 @@
              DATA[flgs=B, len=1016, tsn=3, sid=1, ssn=2, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[], dups=[]]
 +0.1 < sctp: DATA[flgs=E, len=1016, tsn=4, sid=1, ssn=3, ppid=0]
+#ifdef FreeBSD
++0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
+#endif
+#ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=4, a_rwnd=..., gaps=[], dups=[]]
 // now expect recvmsg to fal because the ssn-values indicate that there are still
 // packets missing on the wire
@@ -79,3 +83,5 @@
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
 +0.0 close(4) = 0
+#endif
+
