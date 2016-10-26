@@ -17,7 +17,7 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 | [Handshake with Forward-TSN-supported Parameter](handshake-with-forward-tsn/)          |                        8 | Done          |
 | [Receiver Side Implementation](receiver-side-implementation/)                          |                       72 | In Progress   |
 | [Sender Side Implementation](sender-side-implementation/)                              |                       25 | In Progress   |
-| [Error Cases](error-cases/)                                                            |                       13 | In Progress   |
+| [Error Cases](error-cases/)                                                            |                       22 | In Progress   |
 | [Socket API](socket-api/)                                                              |                        0 | In Progress   |
 
 ## FreeBSD Fixes
