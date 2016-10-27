@@ -75,6 +75,10 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:5], dups=[]]
 +0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]];
              DATA[flgs=E, len=1016, tsn=6, sid=3, ssn=1, ppid=0]
+#ifdef FreeBSD
++0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
+#endif
+#ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
 +0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., 0) = -1
 // Tear down the association
@@ -82,3 +86,4 @@
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
 +0.0 close(4) = 0
+#endif
