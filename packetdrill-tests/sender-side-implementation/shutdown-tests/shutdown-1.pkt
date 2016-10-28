@@ -94,7 +94,12 @@
 +0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = 1000
 // send some data and dont sack it, to see if FORWARD_TSN is sent
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
+#ifdef FreeBSD
 +1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
+#endif
+#ifdef Linux
++3.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
+#endif
 +0.0 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
 // disable further send operations with shutdown
 +0.0 shutdown(4, SHUT_WR) = 0
