@@ -45,13 +45,12 @@
 //             struct sctp_sndrcvinfo* sinfo, int *msg_flags)
 +0.0 < sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=0]
 +0.1 > sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=..., gaps=[], dups=[]]
-// now send a forward_tsn with cum_tsn=0
-+0.0 < sctp: FORWARD_TSN[cum_tsn=0, ids=[{1,0}]]
-// expect a retransmission of SACK-Chunk
-+0.1 > sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=..., gaps=[], dups=[]]
-+0.0 < sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=0]
-+0.1 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[], dups=[]]
-+0.0 sctp_recvmsg(3, ..., 1000, ..., ..., ..., MSG_EOR) = 1000
+// now send a forward_tsn with a huge cum_tsn-value
++0.0 < sctp: FORWARD_TSN[cum_tsn=99999, ids=[{1,0}]]
+// expect it to be sacked by the IUT
++0.1 > sctp: SACK[flgs=0, cum_tsn=99999, a_rwnd=..., gaps=[], dups=[]]
++0.0 < sctp: DATA[flgs=BE, len=1016, tsn=100000, sid=1, ssn=1, ppid=0]
++0.1 > sctp: SACK[flgs=0, cum_tsn=100000, a_rwnd=..., gaps=[], dups=[]]
 +0.0 sctp_recvmsg(3, ..., 1000, ..., ..., ..., MSG_EOR) = 1000
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=2]
