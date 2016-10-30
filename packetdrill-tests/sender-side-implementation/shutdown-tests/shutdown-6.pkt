@@ -104,12 +104,14 @@
 +1.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
                     {sendv_flags=SCTP_SEND_SNDINFO_VALID|SCTP_SEND_PRINFO_VALID,
                      sendv_sndinfo={snd_sid=1, snd_flags=0, snd_ppid=htonl(1234), snd_context=0, snd_assoc_id=0},
-                     sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=0},
+                     sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=2},
                      sendv_authinfo={auth_keynumber=123}}, 32, SCTP_SENDV_SPA, 0) = 1000
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 // disable further send operations with shutdown
 +0.0 shutdown(4, SHUT_WR) = 0
-+2.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
++2.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
++4.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
++8.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.0 < sctp: SHUTDOWN_ACK[flgs=0]
