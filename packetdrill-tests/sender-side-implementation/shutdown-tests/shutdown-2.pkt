@@ -100,5 +100,11 @@
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 // disable further send operations with shutdown
 +0.0 shutdown(4, SHUT_WR) = 0
-+1.0 > sctp: ABORT[flgs=0]
++2.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
++0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
++0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
+// expect that sctp_sendmsg fails because we called shutdown before...
++0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = -1
++0.0 < sctp: SHUTDOWN_ACK[flgs=0]
++0.0 > sctp: SHUTDOWN_COMPLETE[flgs=0]
 +0.0 close(4) = 0
