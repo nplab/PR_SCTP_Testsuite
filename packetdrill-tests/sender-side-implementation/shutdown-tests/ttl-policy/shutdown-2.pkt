@@ -34,12 +34,18 @@
 +0.0 `sysctl -w net.inet.sctp.reconfig_enable=0`
 +0.0 `sysctl -w net.inet.sctp.nrsack_enable=0`
 +0.0 `sysctl -w net.inet.sctp.pktdrop_enable=0`
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -i net.inet.sctp.rto_min=1000`
++0.0 `sysctl -i net.inet.sctp.rto_initial=1000`
 #endif
 
 #ifdef Linux
 // only enable PR-SCTP extension on Linux
  0.0 `sysctl -ew net.sctp.auth_enable=0`
 +0.0 `sysctl -ew net.sctp.prsctp_enable=1`
+// set rto_min and rto_initial to 1000ms for this test case
++0.0 `sysctl -ew net.sctp.rto_min=1000`
++0.0 `sysctl -ew net.sctp.rto_initial=1000`
 #endif
 
 
