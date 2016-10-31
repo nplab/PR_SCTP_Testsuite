@@ -12,7 +12,10 @@
 | [receiver-side-implementation-8](receiver-side-implementation-8.pkt)   | Yes         | Yes               | Yes             |
 | [receiver-side-implementation-9](receiver-side-implementation-9.pkt)   | Yes         | Yes               | Yes             |
 | [receiver-side-implementation-10](receiver-side-implementation-10.pkt) | Yes         | Yes               | Yes             |
+| [receiver-side-implementation-11](receiver-side-implementation-11.pkt) | Yes         | Yes               | Yes (Note 2)    |
 
 # Notes
 1. The FreeBSD Kernel Implementation did not react to incoming FORWARD-TSN-Chunk without any previous DATA-Chunk.
    This issue is solved by [FreeBSD Revision 304837](https://svnweb.freebsd.org/changeset/base/304837)
+2. The Linux Kernel Implementation does not react to the valid FORWARD-TSN-Chunk in this test case and silently
+   ignores it.
