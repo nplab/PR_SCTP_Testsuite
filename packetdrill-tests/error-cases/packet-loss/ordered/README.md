@@ -19,4 +19,4 @@
 
 # Notes
 1. The Linux Kernel Implementation delivers the fragmented ordered user message with inconsistent stream sequence numbers
-   to the userland stack altough it should discard that user message.
+   to the userland stack although it should discard that user message.
