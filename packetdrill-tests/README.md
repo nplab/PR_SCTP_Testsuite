@@ -25,4 +25,4 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 * [r304837](https://svnweb.freebsd.org/changeset/base/304837).
 
 ## References
-* [Formal definition of test cases](https://xdcc.generals-hq.de/spec/)
+* [Formal definition of test cases](https://xdcc.fallout-hq.de/spec/)
