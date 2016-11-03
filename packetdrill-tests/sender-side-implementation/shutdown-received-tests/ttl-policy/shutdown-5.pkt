@@ -106,10 +106,6 @@
 +0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 2500, 0) = 1000
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=1]
-#ifdef FreeBSD
-// expect that sctp_sendmsg fails because we received shutdown before...
-+0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = -1
-#endif
 +2.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 +4.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=2]

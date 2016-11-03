@@ -103,15 +103,10 @@
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
 +1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
-+0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 2500, 0) = 1000
-+0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
++0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), SCTP_UNORDERED, 0, 6500, 0) = 1000
++0.0 > sctp: DATA[flgs=UBE, len=1016, tsn=2, sid=0, ssn=0, ppid=1234]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=1]
-#ifdef FreeBSD
-// expect that sctp_sendmsg fails because we received shutdown before...
-+0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = -1
-#endif
-+2.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
-+4.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
++2.0 > sctp: DATA[flgs=UBE, len=1016, tsn=2, sid=0, ssn=0, ppid=1234]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=2]
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
