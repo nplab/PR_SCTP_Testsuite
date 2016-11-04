@@ -8,7 +8,6 @@
 | [shutdown-12.pkt](shutdown-12.pkt "-")   | Yes           | Yes               | Yes             |
 | [shutdown-13.pkt](shutdown-13.pkt "-")   | Yes           | Yes               | Yes             |
 | [shutdown-2.pkt](shutdown-2.pkt "-")     | Yes           | Yes               | Yes (Note 1)    |
-| [shutdown-3.pkt](shutdown-3.pkt "-")     | Yes           | Yes               | Yes             |
 | [shutdown-4.pkt](shutdown-4.pkt "-")     | Yes           | Yes               | Yes             |
 | [shutdown-5.pkt](shutdown-5.pkt "-")     | Yes           | Yes               | Yes             |
 | [shutdown-6.pkt](shutdown-6.pkt "-")     | Yes           | Yes               | Yes             |
