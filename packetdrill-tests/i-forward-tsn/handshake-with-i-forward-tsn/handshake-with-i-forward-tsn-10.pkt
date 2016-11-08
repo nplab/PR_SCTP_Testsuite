@@ -1,0 +1,47 @@
+--tolerance_usecs=250000
+#ifdef FreeBSD
+// enable only PR-SCTP on FreeBSD
+ 0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
++0.0 `sysctl -i net.inet.sctp.pr_enable=1`
++0.0 `sysctl -i net.inet.sctp.asconf_enable=0`
++0.0 `sysctl -i net.inet.sctp.pktdrop_enable=0`
++0.0 `sysctl -i net.inet.sctp.reconfig_enable=0`
++0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
+#endif
+
++0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
++0.0 setsockopt(3, IPPROTO_SCTP, SCTP_FRAGMENT_INTERLEAVE, [2], 4) = 0
++0.0 setsockopt(3, IPPROTO_SCTP, SCTP_INTERLEAVING_SUPPORTED, {assoc_value=1}, 8) = 0
++0.0 bind(3, ..., ...) = 0
++0.0 listen(3, 1) = 0
++0.0 < sctp: INIT[flgs=0, tag=1, a_rwnd=1500, os=16, is=16, tsn=1,
+                  FORWARD_TSN_SUPPORTED[],
+                  SUPPORTED_EXTENSIONS[types=[FORWARD_TSN]]]
++0.0 > sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=..., os=..., is=..., tsn=1,
+                      FORWARD_TSN_SUPPORTED[],
+                      SUPPORTED_EXTENSIONS[types=[FORWARD_TSN, I_FORWARD_TSN, I_DATA]],
+                      STATE_COOKIE[len=..., val=...]]
++0.1 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
++0.0 > sctp: COOKIE_ACK[flgs=0]
++0.0 accept(3, ..., ...) = 4
++0.0 getsockopt(4, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
+// Turn off the sending of HEARTBEATs.
++0.0 setsockopt(4, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
+
++0.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
+                    {sendv_flags=SCTP_SEND_SNDINFO_VALID|SCTP_SEND_PRINFO_VALID,
+                     sendv_sndinfo={snd_sid=1, snd_flags=0, snd_ppid=htonl(1234), snd_context=0, snd_assoc_id=0},
+                     sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=0},
+                     sendv_authinfo={auth_keynumber=123}}, 32, SCTP_SENDV_SPA, 0) = 1000
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
+* > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
++0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=1500, gaps=[], dups=[]]
+// Tear down the association
++1.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
++0.0 > sctp: SHUTDOWN_ACK[flgs=0]
++0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
++0.0 close(4) = 0
++0.0 close(3) = 0
