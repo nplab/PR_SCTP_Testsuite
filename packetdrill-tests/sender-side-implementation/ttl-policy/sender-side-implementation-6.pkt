@@ -13,6 +13,7 @@
 // set rto_min and rto_initial to 1000ms for this test case
 +0.0 `sysctl -i net.inet.sctp.rto_min=1000`
 +0.0 `sysctl -i net.inet.sctp.rto_initial=1000`
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=1`
 #endif
 
 #ifdef Linux
@@ -58,3 +59,7 @@
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.1 < sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 > sctp: SHUTDOWN_COMPLETE[flgs=0]
+
+#ifdef FreeBSD
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=3`
+#endif

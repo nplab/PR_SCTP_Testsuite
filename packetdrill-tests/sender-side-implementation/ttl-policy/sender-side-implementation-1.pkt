@@ -10,6 +10,7 @@
 +0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
 +0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
 +0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=1`
 #endif
 
 #ifdef Linux
@@ -33,7 +34,7 @@
                                                                     ECN_CAPABLE[], 
                                                                     FORWARD_TSN_SUPPORTED[]]
 #endif
-+0.1 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=1500, os=16, is=16, tsn=1, STATE_COOKIE[len=4, val=...],
++0.1 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=15000, os=16, is=16, tsn=1, STATE_COOKIE[len=4, val=...],
                                                                        FORWARD_TSN_SUPPORTED[]]
 +0.0 > sctp: COOKIE_ECHO[flgs=0, len=4, val=...]
 +0.1 < sctp: COOKIE_ACK[flgs=0]
@@ -68,3 +69,7 @@
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.1 < sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 > sctp: SHUTDOWN_COMPLETE[flgs=0]
+
+#ifdef FreeBSD
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=3`
+#endif
