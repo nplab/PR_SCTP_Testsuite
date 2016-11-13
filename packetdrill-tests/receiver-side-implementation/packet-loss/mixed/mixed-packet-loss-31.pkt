@@ -105,7 +105,7 @@
                                            sinfo_cumtsn=...,
                                            sinfo_assoc_id=...}, MSG_EOR) = 2000
 +0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]];
-             DATA[flgs=UB, len=1016, tsn=3, sid=2, ssn=0, ppid=1235]
+             DATA[flgs=UB, len=1016, tsn=3, sid=0, ssn=0, ppid=1235]
 #ifdef Linux
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[3:4, 6:6], dups=[]];
              SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[2:3, 5:5], dups=[]]
