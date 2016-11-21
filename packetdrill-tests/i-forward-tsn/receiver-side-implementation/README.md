@@ -1,4 +1,4 @@
-# Status of the Handshake with Forward-TSN Tests
+# Status of the Receiver Side Implementation Tests
 
 | Name                                                                             | Implemented   | Finalized FreeBSD |
 | :------------------------------------------------------------------------------: | :-----------: | :---------------: |
