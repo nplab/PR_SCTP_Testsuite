@@ -58,16 +58,9 @@
 +0.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[]]
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], nr_gaps=[2:2, 4:4], dups=[]]
 
-// this is what i expected:
-//+0.0 > sctp: FORWARD_TSN[cum_tsn=8, ids=[]]
-//+0.1 < sctp: NR_SACK[flgs=0, cum_tsn=8, a_rwnd=10000, gaps=[], nr_gaps=[], dups=[]]
++0.0 > sctp: FORWARD_TSN[cum_tsn=8, ids=[]]
++0.1 < sctp: NR_SACK[flgs=0, cum_tsn=8, a_rwnd=10000, gaps=[], nr_gaps=[], dups=[]]
 
-// this is what is on the wire:
-+0.0 > sctp: FORWARD_TSN[cum_tsn=4, ids=[]]
-+0.1 < sctp: NR_SACK[flgs=0, cum_tsn=4, a_rwnd=10000, gaps=[], nr_gaps=[1:1, 3:3], dups=[]]
-
-// could the receiver of that message know that tsn=8 was abandoned by the sender,
-// if that DATA-Chunk was lost due to network congestion and has never been received...?
 +0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), SCTP_UNORDERED, 0, 0, 0) = 1000   // tsn = 9
 +0.0 > sctp: DATA[flgs=UBE, len=1016, tsn=9, sid=0, ssn=0, ppid=1234]
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=9, a_rwnd=10000, gaps=[], nr_gaps=[], dups=[]]
