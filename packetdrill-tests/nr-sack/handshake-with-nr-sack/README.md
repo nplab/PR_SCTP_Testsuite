@@ -1,4 +1,4 @@
-# Status of the Sender Side Implementation Shutdown Received TTL Tests
+# Status of the Handshake with NR-SACK-Extension Tests
 
 | Name                                                               | Implemented   | Finalized FreeBSD   |
 | :----------------------------------------------------------------: | :-----------: | :-----------------: |
