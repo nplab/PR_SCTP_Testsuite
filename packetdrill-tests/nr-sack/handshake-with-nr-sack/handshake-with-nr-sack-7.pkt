@@ -29,7 +29,7 @@
 +1.0 write(3, ..., 1000) = 1000
 
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]
-// TODO: is it ok that the IUT accepts this SACK and does not ignore it?
+// this assumes that the IUT should accept this SACK and does not ignore it
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=15000, gaps=[], dups=[]]
 
 +1.0 < sctp: DATA[flgs=UBE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]

@@ -39,7 +39,7 @@
 +1.0 write(3, ..., 2000) = 2000
 +0.0 > sctp: DATA[flgs=B, len=1468, tsn=3, sid=0, ssn=1, ppid=0]
 +0.0 > sctp: DATA[flgs=E, len=564, tsn=4, sid=0, ssn=1, ppid=0]
-// TODO: is it ok that the IUT accepts an SACK and also an NR_SACK?
+// this assumes that the IUT should accept both SACKs and NR-SACKs
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=2, a_rwnd=15000, gaps=[1:1], nr_gaps=[], dups=[]]
 +2.0 > sctp: DATA[flgs=E, len=564, tsn=4, sid=0, ssn=1, ppid=0]
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=4, a_rwnd=15000, gaps=[], nr_gaps=[], dups=[]]
