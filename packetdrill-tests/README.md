@@ -15,10 +15,10 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 | Test Group                                                                             |   Number of Test Scripts | Status        |
 | :------------------------------------------------------------------------------------- | :----------------------: | :-----------: |
 | [Handshake with Forward-TSN-supported Parameter](handshake-with-forward-tsn/)          |                        8 | Done          |
-| [Receiver Side Implementation](receiver-side-implementation/)                          |                       72 | In Progress   |
-| [Sender Side Implementation](sender-side-implementation/)                              |                       75 | In Progress   |
+| [Receiver Side Implementation](receiver-side-implementation/)                          |                       72 | Done          |
+| [Sender Side Implementation](sender-side-implementation/)                              |                       75 | Done          |
 | [Error Cases](error-cases/)                                                            |                       27 | In Progress   |
-| [I-FORWARD-TSN and I-DATA](i-forward-tsn/)                                             |                      128 | In Progress   |
+| [I-FORWARD-TSN and I-DATA](i-forward-tsn/)                                             |                      128 | Done          |
 | [NR-SACK](nr-sack/)                                                                    |                       62 | In Progress   |
 
 ## FreeBSD Fixes
