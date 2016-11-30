@@ -107,7 +107,7 @@
 +0.0 shutdown(4, SHUT_WR) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 // expect that sctp_sendmsg fails because we called shutdown before...
-+0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = -1
++0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = -1 EPIPE (Broken pipe)
 +0.0 < sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 > sctp: SHUTDOWN_COMPLETE[flgs=0]
 +0.0 close(4) = 0
