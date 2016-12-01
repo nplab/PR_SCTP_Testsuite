@@ -1,0 +1,59 @@
+--tolerance_usecs=20000
+#ifdef FreeBSD
+// only enable NR-SACK extension on FreeBSD
+ 0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
++0.0 `sysctl -i net.inet.sctp.pr_enable=0`
++0.0 `sysctl -i net.inet.sctp.asconf_enable=0`
++0.0 `sysctl -i net.inet.sctp.pktdrop_enable=0`
++0.0 `sysctl -i net.inet.sctp.reconfig_enable=0`
++0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nrsack_enable=1`  // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.nrsack_on_off=1`  // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=6`
++0.0 `sysctl -i net.inet.sctp.maxburst=6`
+#endif
+
++0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
++0.0 fcntl(3, F_GETFL) = 0x2 (flags O_RDWR)
++0.0 fcntl(3, F_SETFL, O_RDWR|O_NONBLOCK) = 0
++0.0 setsockopt(3, IPPROTO_SCTP, SCTP_RTOINFO, {srto_initial=100, srto_max=800, srto_min=100}, 16) = 0
++0.0 bind(3, ..., ...) = 0
++0.1 connect(3, ..., ...) = -1 EINPROGRESS (Operation now in progress)
++0.0 > sctp: INIT[flgs=0, tag=1, a_rwnd=..., os=..., is=..., tsn=1, SUPPORTED_EXTENSIONS[types=[NR_SACK]], 
+                                                                    SUPPORTED_ADDRESS_TYPES[types=[IPv4]]]
++0.0 < sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=15000, os=16, is=16, tsn=1, SUPPORTED_EXTENSIONS[types=[NR_SACK]], 
+                                                                        STATE_COOKIE[len=4, val=...]]
++0.0 > sctp: COOKIE_ECHO[flgs=0, len=4, val=...]
++0.0 < sctp: COOKIE_ACK[flgs=0]
++0.0 getsockopt(3, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
+// Disable Nagle Algorithm
++0.0 setsockopt(3, IPPROTO_SCTP, SCTP_NODELAY, [1], 4) = 0
+// Turn off the sending of HEARTBEATs.
++0.0 setsockopt(3, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
+
++0.0 write(3, ..., 1000) = 1000
++0.0 write(3, ..., 1000) = 1000
++0.0 write(3, ..., 1000) = 1000
++0.0 write(3, ..., 1000) = 1000
++0.0 write(3, ..., 1000) = 1000
++0.0 write(3, ..., 1000) = 1000
+
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=0, ssn=1, ppid=0]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=3, sid=0, ssn=2, ppid=0]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=4, sid=0, ssn=3, ppid=0]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=5, sid=0, ssn=4, ppid=0]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=6, sid=0, ssn=5, ppid=0]
+
++0.0 < sctp: NR_SACK[flgs=0, cum_tsn=0, a_rwnd=15000, gaps=[], nr_gaps=[2:5], dups=[]]
++0.1 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]
+// now send an NR_SACK-Chunk where some of the previously acknowledged blocks are withdrawn
++0.0 < sctp: NR_SACK[flgs=0, cum_tsn=1, a_rwnd=15000, gaps=[], nr_gaps=[4:4], dups=[]]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=6, sid=0, ssn=5, ppid=0]
++0.0 < sctp: NR_SACK[flgs=0, cum_tsn=6, a_rwnd=15000, gaps=[], nr_gaps=[], dups=[]]
+
+#ifdef FreeBSD
++0.0 `sysctl -i net.inet.sctp.initial_cwnd=3`
++0.0 `sysctl -i net.inet.sctp.maxburst=4`
+#endif
