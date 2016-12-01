@@ -43,7 +43,7 @@
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=3, sid=1, ssn=2, ppid=1234]
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=0, a_rwnd=10000, gaps=[], nr_gaps=[2:2], dups=[]]
 
-+1.0 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,0},{1,2}]]
++1.0 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,2}]]
 +0.1 < sctp: NR_SACK[flgs=0, cum_tsn=3, a_rwnd=10000, gaps=[], nr_gaps=[], dups=[]]
 
 // now send another user message to verify that the outgoing tsn is now 4 and the ssn value is correct...
