@@ -22,8 +22,9 @@ and overcomes this limitation and adds support for SCTP and UDPLite.
 | [NR-SACK](nr-sack/)                                                                    |                       77 | In Progress   |
 
 ## FreeBSD Fixes
-* [r303834](https://svnweb.freebsd.org/changeset/base/303834).
-* [r304837](https://svnweb.freebsd.org/changeset/base/304837).
+* [r303834](https://svnweb.freebsd.org/changeset/base/303834)
+* [r304837](https://svnweb.freebsd.org/changeset/base/304837)
+* [r309851](https://svnweb.freebsd.org/changeset/base/309851)
 
 ## References
 * [Formal definition of test cases](https://xdcc.fallout-hq.de/spec/)
