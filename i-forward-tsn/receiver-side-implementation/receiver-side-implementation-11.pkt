@@ -42,6 +42,7 @@
 +0.0 < sctp: I_DATA[flgs=BE, len=1020, tsn=100000, sid=1, mid=1, ppid=0]
 +0.1 > sctp: SACK[flgs=0, cum_tsn=100000, a_rwnd=..., gaps=[], dups=[]]
 +0.0 sctp_recvmsg(3, ..., 1000, ..., ..., ..., MSG_EOR) = 1000
++0.0 sctp_recvmsg(3, ..., 1000, ..., ..., ..., MSG_EOR) = 1000
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=100000]
 +0.1 < sctp: SHUTDOWN_ACK[flgs=0]
