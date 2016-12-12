@@ -36,7 +36,7 @@
                      sendv_sndinfo={snd_sid=1, snd_flags=0, snd_ppid=htonl(1234), snd_context=0, snd_assoc_id=0},
                      sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=0},
                      sendv_authinfo={auth_keynumber=123}}, 32, SCTP_SENDV_SPA, 0) = 1000
-+0.0 > sctp: I_DATA[flgs=BE, len=1020, tsn=1, sid=1, mid=0, ppid=1234]
++0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
 * > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=1500, gaps=[], dups=[]]
 // Tear down the association
