@@ -98,7 +98,7 @@
 +0.1 sctp_recvmsg(4, ..., 6000, ..., ..., {sinfo_stream=0,
                                            sinfo_ssn=0,
                                            sinfo_flags=SCTP_UNORDERED,
-                                           sinfo_ppid=htonl(1235),
+                                           sinfo_ppid=htonl(1234),
                                            sinfo_context=0,
                                            sinfo_timetolive=0,
                                            sinfo_tsn=3,
