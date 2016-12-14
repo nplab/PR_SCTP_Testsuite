@@ -76,9 +76,9 @@
 +0.1 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]
 // now send an NR_SACK-Chunk where all of the previously nr-gap-blocks are now listed at the gap-blocks
 +0.0 < sctp: NR_SACK[flgs=0, cum_tsn=0, a_rwnd=15000, gaps=[2:5], nr_gaps=[], dups=[]]
-+0.2 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=0, ssn=0, ppid=0]
-+0.0 < sctp: NR_SACK[flgs=0, cum_tsn=5, a_rwnd=15000, gaps=[], nr_gaps=[], dups=[]]
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=6, sid=0, ssn=5, ppid=0]
++0.0 < sctp: NR_SACK[flgs=0, cum_tsn=5, a_rwnd=15000, gaps=[], nr_gaps=[], dups=[]]
++0.2 > sctp: DATA[flgs=BE, len=1016, tsn=6, sid=0, ssn=5, ppid=0]
 +0.0 < sctp: NR_SACK[flgs=0, cum_tsn=6, a_rwnd=15000, gaps=[], nr_gaps=[], dups=[]]
 
 #ifdef FreeBSD
