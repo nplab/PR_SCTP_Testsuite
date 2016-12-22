@@ -1,3 +1,8 @@
+## Structure of the Testsuite
+| Test Group                                                                             | Number of Test Scripts   | Status   |
+| :------------------------------------------------------------------------------------- | :----------------------: | :------: |
+| [Tests with Packet Loss](packet-loss/)                                                 |                       65 | Done     |
+
 # Status of the Receiver Side Implementation Tests
 
 | Name                                                                             | Implemented   | Finalized FreeBSD |
