@@ -1,7 +1,7 @@
 ## Structure of the Testsuite
-| Test Group                                                                             |   Number of Test Scripts | Status   |
+| Test Group                                                                             | Number of Test Scripts   | Status   |
 | :------------------------------------------------------------------------------------- | :----------------------: | :------: |
-| [Tests with Packet Loss](packet-loss/)                                                 |                       65 | Done     |
+| [Tests with Packet Loss](packet-loss/README.md)                                        | 65                       | Done     |
 
 # Status of the Receicer Side Implementation 
 
