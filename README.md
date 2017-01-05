@@ -15,8 +15,8 @@ overcoming this limitation and adding support for SCTP and UDPLite.
 | Test Group                                                                             |   Number of Test Scripts | Status        |
 | :------------------------------------------------------------------------------------- | :----------------------: | :-----------: |
 | [FORWARD-TSN](forward-tsn/README.md)                                                   |                      177 | Done          |
-| [I-FORWARD-TSN and I-DATA](i-forward-tsn/)                                             |                      132 | Done          |
-| [NR-SACK](nr-sack/)                                                                    |                       77 | In Progress   |
+| [I-FORWARD-TSN and I-DATA](i-forward-tsn/README.md)                                    |                      132 | Done          |
+| [NR-SACK](nr-sack/README.md)                                                           |                       77 | In Progress   |
 
 ## FreeBSD Fixes
 * [r303834](https://svnweb.freebsd.org/changeset/base/303834)
