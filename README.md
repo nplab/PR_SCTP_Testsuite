@@ -14,7 +14,7 @@ overcoming this limitation and adding support for SCTP and UDPLite.
 ## Structure of the Testsuite
 | Test Group                                                                             |   Number of Test Scripts | Status        |
 | :------------------------------------------------------------------------------------- | :----------------------: | :-----------: |
-| [FORWARD-TSN](forward-tsn/README.md)                                                   |                      177 | Done          |
+| [FORWARD-TSN](forward-tsn/README.md)                                                   |                      162 | Done          |
 | [I-FORWARD-TSN and I-DATA](i-forward-tsn/README.md)                                    |                      132 | Done          |
 | [NR-SACK](nr-sack/README.md)                                                           |                       77 | In Progress   |
 
