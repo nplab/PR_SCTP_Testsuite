@@ -19,7 +19,7 @@
 
 # Notes
 1. The Linux Kernel Implememtation sends correct but slightly out-of-date informations in the SACK-Chunk, because it seems
-   to first process the FORwARD-TSN-Chunk and sends directly a SACK-CHUNK without looking at the bundled DATA-Chunk.
+   to first process the FORWARD-TSN-Chunk and sends directly a SACK-CHUNK without looking at the bundled DATA-Chunk.
 2. The FreeBSD Kernel Implementation does not allow to receive the available user messages before the first fragmented user message was 
    fully received by the kernel.
 3. The FreeBSD Kernel Implementation sends an ABORT Chunk with the Cause Protocol Violation instead of a SACK Chunk in line 76.
