@@ -11,4 +11,4 @@
 # Notes
 1. The FreeBSD Kernel Implementation does not send the correct FORWARD-TSN-Chunk
 2. After calling close() the FreeBSD Kernel Implementation does not send a SHUTDOWN-Chunk.
-   It 
+   300 seconds after calling close an ABORT-Chunk is sent by IUT which is not expected.
