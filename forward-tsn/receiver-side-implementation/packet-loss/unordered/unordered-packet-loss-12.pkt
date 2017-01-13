@@ -61,9 +61,6 @@
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4
 +0.0 close(3) = 0
-+0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
-+0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
-
 +0.1 < sctp: DATA[flgs=UE, len=1016, tsn=4, sid=0, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[4:4], dups=[]]
 +0.1 < sctp: DATA[flgs=UB, len=1016, tsn=3, sid=0, ssn=0, ppid=0]
@@ -73,8 +70,14 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[3:4, 6:6], dups=[]]
 +0.1 < sctp: FORWARD_TSN[cum_tsn=2, ids=[]];
              DATA[flgs=UB, len=1016, tsn=5, sid=0, ssn=0, ppid=0]
+#ifdef FreeBSD
 +0.0 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
-+0.1 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
+#endif
+#ifdef Linux
++0.0 > sctp: SACK[flgs=0, cum_tsn=4, a_rwnd=..., gaps=[2:2], dups=[]]
++0.2 > sctp: SACK[flgs=0, cum_tsn=6, a_rwnd=..., gaps=[], dups=[]]
+#endif
++0.0 sctp_recvmsg(4, ..., 6000, ..., ..., ..., MSG_EOR) = 2000
 // Tear down the association
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]

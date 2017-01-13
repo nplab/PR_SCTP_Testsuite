@@ -24,7 +24,7 @@
 // SUCH DAMAGE.
 //
 
---tolerance_usecs=250000
+--tolerance_usecs=25000
 #ifdef FreeBSD
 // only enable PR-SCTP extension on FreeBSD
  0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
@@ -70,12 +70,8 @@
 +0.0 > sctp: COOKIE_ECHO[flgs=0, len=4, val=...]
 +0.1 < sctp: COOKIE_ACK[flgs=0]
 +0.0 getsockopt(3, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
-// Turn off the sending of HEARTBEATs.
-+0.0 setsockopt(3, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
-//sctp_sendmsg(int sd, const void * msg, size_t len, struct sockaddr *to, socklen_t tolen,
-//             uint32_t ppid, uint32_t flags, uint16_t stream_no, uint32_t timetolive, uint32_t context);
 +0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = 1000
-+0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), 0, 2, 3000, 0) = 1000
++0.0 sctp_sendmsg(3, ..., 1000, ..., ..., htonl(1234), 0, 2, 2500, 0) = 1000
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
 +1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]; 
              DATA[flgs=BE, len=1016, tsn=2, sid=2, ssn=0, ppid=1234]
@@ -83,7 +79,7 @@
 #ifdef FreeBSD
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=2, ssn=0, ppid=1234]
 #endif
-+2.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{2,0}]]
++1.9 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{2,0}]]
 +0.1 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]

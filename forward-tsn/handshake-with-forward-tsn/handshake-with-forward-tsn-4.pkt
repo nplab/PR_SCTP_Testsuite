@@ -61,10 +61,8 @@
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4
 +0.0 getsockopt(4, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
-// Turn off the sending of HEARTBEATs.
-+0.0 setsockopt(4, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
 +0.0 < sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
-+0.0 > sctp: ERROR[flgs=0, UNRECOGNIZED_CHUNK_TYPE[chk=CHUNK[type=0xC0, flgs=0, len=12, val=...]]]
++0.0 > sctp: ERROR[flgs=0, UNRECOGNIZED_CHUNK_TYPE[chk=FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]]]
 // Tear down the association
 +1.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]

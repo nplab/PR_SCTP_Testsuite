@@ -61,9 +61,6 @@
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4
 +0.0 close(3) = 0
-+0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
-+0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
-
 +0.0 < sctp: DATA[flgs=E, len=1016, tsn=2, sid=1, ssn=0, ppid=0]
 +0.0 > sctp: SACK[flgs=0, cum_tsn=0, a_rwnd=..., gaps=[2:2], dups=[]]
 +0.0 < sctp: DATA[flgs=E, len=1016, tsn=4, sid=2, ssn=0, ppid=0]
@@ -76,7 +73,7 @@
 +0.0 > sctp: SACK[flgs=0, cum_tsn=4, a_rwnd=..., gaps=[2:2], dups=[]]
 #endif
 #ifdef Linux
-// here linux bundles two SACKs in one packet... 
+// here linux bundles two SACKs in one packet...
 // this is at least inefficient since the second SACK seems more appropiate
 +0.0 > sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=..., gaps=[2:2, 4:4], dups=[]];
              SACK[flgs=0, cum_tsn=4, a_rwnd=..., gaps=[2:2], dups=[]]

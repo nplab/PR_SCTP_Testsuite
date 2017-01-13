@@ -47,8 +47,6 @@
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
 +0.0 bind(3, ..., ...) = 0
 +0.0 listen(3, 1) = 0
-//                                                      initiate tag  |       a_rwnd          | out_streams | in_streams |
-+0.0 < sctp: CHUNK[type=1, flgs=0, len=28, val=[0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x05, 0xdc, 0x00, 0x01  , 0x00, 0x01 , 
-//                   initial_tsn         | forward_tsn_supported (too long, 8 bytes instead of 4)
-                   0x00, 0x00, 0x00, 0x01, 0xc0, 0x00, 0x00, 0x08, 0x01, 0x02, 0x03, 0x04 ]]
++0.0 < sctp: INIT[flgs=0, tag=1, a_rwnd=1500, os=1, is=1, tsn=1,
+                  PARAMETER[type=0xc000, len=8, val=[0x01, 0x02, 0x03, 0x04]]]
 +0.0 > sctp: ABORT[flgs=0x00, PROTOCOL_VIOLATION[info=...]]
