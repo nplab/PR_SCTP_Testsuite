@@ -78,8 +78,11 @@
 +0.1 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
 #ifdef FreeBSD
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=2, ssn=0, ppid=1234]
++2.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{2,0}]]
 #endif
+#ifdef Linux
 +1.9 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{2,0}]]
+#endif
 +0.1 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +1.0 close(3) = 0
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
