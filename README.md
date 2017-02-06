@@ -23,5 +23,8 @@ overcoming this limitation and adding support for SCTP and UDPLite.
 * [r304837](https://svnweb.freebsd.org/changeset/base/304837)
 * [r309851](https://svnweb.freebsd.org/changeset/base/309851)
 
+## Linux Fixes
+* [process fwd tsn chunk only when prsctp is enabled](https://www.spinics.net/lists/linux-sctp/msg05672.html)
+
 ## References
 * [Formal definition of test cases](https://xdcc.fallout-hq.de/spec/)
