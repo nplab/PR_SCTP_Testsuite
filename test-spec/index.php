@@ -180,8 +180,8 @@ function loadTestCase ($id, $filename) {
 
 function loadTestCases($suite_folder_name) {
     $test_cases = scandir($suite_folder_name);
-    $test_cases_filtered = array_filter($test_cases, function($element) {
-        return !($element === "." || $element === "..");
+    $test_cases_filtered = array_filter($test_cases, function($element) use (&$suite_folder_name) {
+        return !($element === "." || $element === ".." || is_dir($suite_folder_name. '/'. $element));
     });
     
     $ret = array();
@@ -199,17 +199,28 @@ $test_suites = array(
     new Testsuite("nftsp", "negotiation-forward-tsn-supported-parameter", "Negotiation of Forward-TSN-supported parameter"),
     new Testsuite("ssi", "sender-side-implementation", "Sender Side Implementation", 'These test cases use the term "abandoned" like defined in <a href="https://tools.ietf.org/html/rfc3758#section-3.4">RFC 3758 [section 3.4]</a>. 
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.'),
-    new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation"),
+	new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation"),
+	new Testsuite("error-cases", "error-cases", "Error Cases"),
 );
 
 function sort_by_testcase_id($a, $b) {
-    $regex = '!\d+!';
+    $regex = '!([^0-9.]*)(\d+)!';
     $matches_a = array();
     $matches_b = array();
     preg_match_all($regex, $a->id, $matches_a);
     preg_match_all($regex, $b->id, $matches_b);
 
-    return $matches_a[0] > $matches_b[0];
+	$test_case_name_a = $matches_a[1][0];
+	$test_case_name_b = $matches_b[1][0];
+
+	$test_case_id_a = $matches_a[2][0];
+	$test_case_id_b = $matches_b[2][0];
+
+	if ($test_case_name_a !== $test_case_name_b) {
+		return $test_case_name_a > $test_case_name_b;
+	} else {
+		return $test_case_id_a > $test_case_id_b;
+	}
 }
 
 $all_test_cases = array();

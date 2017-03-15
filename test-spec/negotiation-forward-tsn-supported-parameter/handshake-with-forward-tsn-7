@@ -10,7 +10,7 @@ Purpose:
 Ensure that the IUT has disabled PR-SCTP for this association.
 
 References:
-<span class="todo">Are there some references for these situations in the RFCs?</span>
+<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>
 
 
 
