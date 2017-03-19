@@ -201,6 +201,7 @@ $test_suites = array(
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.'),
 	new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation"),
 	new Testsuite("error-cases", "error-cases", "Error Cases"),
+    new Testsuite("hwift", "handshake-with-i-forward-tsn", "Handshake with I-FORWARD-TSN"),
 );
 
 function sort_by_testcase_id($a, $b) {
@@ -231,6 +232,7 @@ foreach ($test_suites as $test_suite) {
 
 uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
 uasort($test_suites[2]->test_cases, "sort_by_testcase_id");
+uasort($test_suites[4]->test_cases, "sort_by_testcase_id");
 
 ?>
 <!doctype html>
