@@ -199,9 +199,10 @@ $test_suites = array(
     new Testsuite("nftsp", "negotiation-forward-tsn-supported-parameter", "Negotiation of Forward-TSN-supported parameter"),
     new Testsuite("ssi", "sender-side-implementation", "Sender Side Implementation", 'These test cases use the term "abandoned" like defined in <a href="https://tools.ietf.org/html/rfc3758#section-3.4">RFC 3758 [section 3.4]</a>. 
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.'),
-	new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation"),
+	new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation", 'Please note that the packet-loss test-cases can be applied to ordered, unordered or an mixture of both DATA-Chunks. To avoid redundant definitions of equivalent loss patterns these descriptions are so generic that they can be applied to both ordered and unordered or an mixture of both.'),
 	new Testsuite("error-cases", "error-cases", "Error Cases"),
     new Testsuite("hwift", "handshake-with-i-forward-tsn", "Handshake with I-FORWARD-TSN"),
+	new Testsuite("hwnrs", "handshake-with-nr-sack", "Handshake with NR-SACK"),
 );
 
 function sort_by_testcase_id($a, $b) {
