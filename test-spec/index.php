@@ -203,6 +203,7 @@ $test_suites = array(
 	new Testsuite("error-cases", "error-cases", "Error Cases"),
     new Testsuite("hwift", "handshake-with-i-forward-tsn", "Handshake with I-FORWARD-TSN"),
 	new Testsuite("hwnrs", "handshake-with-nr-sack", "Handshake with NR-SACK"),
+	new Testsuite("dawnrs", "data-sender", "Data Sender with NR-SACK"),
 );
 
 function sort_by_testcase_id($a, $b) {
@@ -234,6 +235,7 @@ foreach ($test_suites as $test_suite) {
 uasort($test_suites[1]->test_cases, "sort_by_testcase_id");
 uasort($test_suites[2]->test_cases, "sort_by_testcase_id");
 uasort($test_suites[4]->test_cases, "sort_by_testcase_id");
+uasort($test_suites[6]->test_cases, "sort_by_testcase_id");
 
 ?>
 <!doctype html>
