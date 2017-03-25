@@ -58,7 +58,7 @@
 +0.0 read(3, ..., 2000) = 1000
 
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=3, sid=1, ssn=2, ppid=0]
-+0.1 > sctp: NR_SACK[flgs=0, cum_tsn=1, a_rwnd=..., gaps=[], nr_gaps=[2:2], dups=[]]
++0.1 > sctp: NR_SACK[flgs=0, cum_tsn=1, a_rwnd=..., gaps=[2:2], nr_gaps=[], dups=[]]
 
 +0.1 < sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=0]
 +0.1 > sctp: NR_SACK[flgs=0, cum_tsn=3, a_rwnd=..., gaps=[], nr_gaps=[], dups=[]]
