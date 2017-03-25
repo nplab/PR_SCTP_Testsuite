@@ -2,7 +2,7 @@ Precondition:
 IUT does support the NR-SACK extension. 
 Association is established between tester and IUT where both sides have announced support for NR-SACK-Chunks at the handshake.
 Arrange the data at the tester such that it sends five unordered not fragmented user messages to the IUT
-with the following order (relative tsn numbers): 1, 3, 5, 4, 2.
+with the following order (relative tsn numbers):  2, 3, 4, 5, 1.
 
 
 Purpose:
