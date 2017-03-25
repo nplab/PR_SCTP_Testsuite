@@ -27,13 +27,13 @@ class Abbreviation {
 $abbreviations = array(
     new Abbreviation("SCTP", "Stream Control Transmission Protocol"),
     new Abbreviation("PR-SCTP", "Partial Reliability Extension for SCTP"),
-    new Abbreviation("SUT", "System under Test"),
+    new Abbreviation("NR-SACK", "Non-Renegable Selective Acknowledgements"),
+    new Abbreviation("RFC", "Request for comments"),
     new Abbreviation("IUT", "Implementation under Test"),
-    new Abbreviation("V", "Valid Behaviour"),
-    new Abbreviation("I", "Invalid Behaviour"),
-    new Abbreviation("O", "Inopportune behaviour"),
     new Abbreviation("TSN", "Transmission Sequence Number"),
     new Abbreviation("cwnd", "Congestion Window Size"),
+    new Abbreviation("cum_tsn", "Cumulative Transmission Sequence Number"),
+    new Abbreviation("nr-gaps", "Non Renegable Gap Ack Blocks"),
 );
 
 uasort($abbreviations, function ($a, $b) {
@@ -81,6 +81,8 @@ class Testsuite {
 
         foreach ($this->test_cases as $test_case) {
             $html .= $test_case;
+            $a = HtmlNode::get_builder("a")->attribute("href", "#overview")->s_text("Back to Testsuite-Overview")->build();
+            $html .= $a;
         }
 
         return $html;
@@ -99,7 +101,7 @@ class Testcase {
     }
     
     public function __toString() {
-        $table = HtmlNode::get_builder("table")->attribute("class", "test_case_table")->attribute("id", $this->id)->build();
+        $table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered test_case_table")->attribute("id", $this->id)->build();
         $tbody = HtmlNode::get_builder("tbody")->build();
         $table->addChildNode($tbody);
         
@@ -246,78 +248,156 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test-Suite for the SCTP Partial Reliability Extension</title>
-	<style type="text/css">
-		* {
-			padding: 0;
-			margin: 0;
-		}
-		body {
-			margin: 10px 100px 10px 20px;
-		}
-		h1 {
-			margin: 20px 0px;
-		}
-		h2 {
-			margin: 15px 10px;
-		}
-		h3 {
-			margin: 12px 15px;
-		}
-		ul {
-			padding: 1em 2em;
-   			list-style-type: disc;
-   			list-style-position: outside;
-   			list-style-image: none;
-		}
-	
-		.overview_ol {
-			list-style-type: upper-roman; 
-			padding: 1em 2em;
-		}
-		
-		ol {
-			padding: 1em 2em;
-		}
-	
-		#abbreviation_table {
-			border-collapse: collapse;
-		}
+     <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-		#abbreviation_table td {
-			border: 1px solid black;
-			padding: 10px;
-		}
-	
-		.test_case_table {
-			width: 75%;
-			border-collapse: collapse;
-			margin: 20px 20px;
-			background-color: #ececec;
-		}
-	
-		.test_case_table td {
-			border: 1px solid black;
-			padding: 10px;
-		}
-			
-		.todo {
-			color: red;
-		}
-	
-		a {
-			color: blue;
-		}
-	</style>
-  </head>
-  <body>
-	<h1>Introduction</h1>
-	<p>This is a html document that describes the test suite for the partial reliability extension of sctp.
-	   It is current work in progress and later this introduction will be a general description of the 
-       designed test suite.
-	</p>
-	<h2>Abbreviations</h2>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="bootstrap/css/ie-bugfix.css" rel="stylesheet">
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <style type="text/css">
+            * {
+                    padding: 0;
+                    margin: 0;
+            }
+            body {
+                    margin: 10px 100px 10px 20px;
+            }
+            h1 {
+                    margin: 20px 0px;
+            }
+            h2 {
+                    margin: 15px 10px;
+            }
+            h3 {
+                    margin: 12px 15px;
+            }
+            ul {
+                    padding: 1em 2em;
+                    list-style-type: disc;
+                    list-style-position: outside;
+                    list-style-image: none;
+            }
+
+            .overview_ol {
+                    list-style-type: upper-roman; 
+                    padding: 1em 2em;
+            }
+
+            ol {
+                    padding: 1em 2em;
+            }
+
+            #abbreviation_table {
+                    border-collapse: collapse;
+            }
+
+            #abbreviation_table td {
+                    border: 1px solid black;
+                    padding: 10px;
+            }
+
+            .test_case_table {
+                    /*width: 75%;*/
+                    /*border-collapse: collapse;*/
+                    margin: 20px 20px;
+                    background-color: #fbfbfb;
+            }
+
+            .test_case_table td {
+                    border: 1px solid black;
+                    padding: 10px;
+            }
+
+            .todo {
+                    color: red;
+            }
+
+            a {
+                    color: blue;
+            }
+    </style>
+    </head>
+    <body>
+        <h1>Test-Suite for the SCTP Partial Reliability Extension</h1>
+        
+	<h2>Introduction</h2>
+        <div class="well">
+            <p>This is a document that defines a test suite for the partial reliability extension of sctp.
+                The designed test suite for PR-SCTP consists of eight different categories. A practial implementation of
+                these test-cases can be found for the tool packetdrill under <a href="https://github.com/nplab/PR_SCTP_Testsuite">https://github.com/nplab/PR_SCTP_Testsuite</a>.
+                Most test-cases were specified close to the specification of the tested extensions of SCTP. Therefore each test-case
+                lists the relevant references that were used to design the test-case. 
+            </p>
+                
+            <p> 
+                Please note that the categories <i>Sender Side Implementation</i> and <i>Receiver Side Implementation</i> can be applied to either the classic 
+                PR-SCTP or the PR-SCTP extension with user message interleaving (see <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09">Stream Schedulers and User Message Interleaving for SCTP</a>).
+                If these tests are applied to the user message interleaving extension then the sid/ssn-values in the DATA-Chunks have to converted
+                such that they match the new sid/mid/fsn-values in the I-DATA-Chunk (and also use the I-DATA-Chunk instead). 
+                Also each FORWARD-TSN-Chunk has to be replaced by an equivalent I-FORWARD-TSN-Chunk. Other than these conversions
+                every test case of the categories <i>Sender Side Implementation</i> and <i>Receiver Side Implementation</i> can also
+                be applied to the Stream Schedulers and User Message Interleaving extension.
+            </p>
+        </div>
+
+	<h2 id="overview">Overview of Test-Suite-Structure</h2>
+<!--
+	<ol class="overview_ol">
+		<li>Negotiation of Forward-TSN-supported parameter</li>
+		<li>Sender Side Implementation</li>
+		<li>Receiver Side Implementation</li>
+		<li>Additional Policies</li>
+		<li>Corner cases and error conditions</li>
+	</ol>
+-->
+
+	<?php
+        $divs = array();
+        
+        foreach ($test_suites as $test_suite) {
+            $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-4")->build();
+            $panel_div = HtmlNode::get_builder("div")->attribute("class", "panel panel-default")->build();
+            $div->addChildNode($panel_div);
+            $heading_div = HtmlNode::get_builder("div")->attribute("class", "panel-heading")->build();
+            $body_div = HtmlNode::get_builder("div")->attribute("class", "panel-body")->build();
+            $panel_div->addChildNode($heading_div);
+            $panel_div->addChildNode($body_div);
+            $h3 = HtmlNode::get_builder("h3")->attribute("class", "panel-title")->s_text($test_suite->longName)->build();
+            $heading_div->addChildNode($h3);
+
+            $ul = HtmlNode::get_builder("ul")->build();
+            foreach ($test_suite->test_cases as $test_case) {
+                $li_child = HtmlNode::get_builder("li")->build();
+                $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
+                $li_child->addChildNode($a_child);
+                $ul->addChildNode($li_child);
+            }
+            $body_div->addChildNode($ul);
+            
+            array_push($divs, $div);
+        }
+        
+        $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+        $i = 1;
+        foreach ($divs as $div) {
+            $outer_div->addChildNode($div);
+            
+            if (($i % 3) === 0) {
+                echo $outer_div;
+                $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+            }
+            $i++;
+        }
+        
+        echo $outer_div;
+		
+	?>
+    <div class="col-sm-6">
+    <h3>Abbreviations</h3>
         <?php
-        $abbrev_table = HtmlNode::get_builder("table")->attribute("id", "abbreviation_table")->build();
+        $abbrev_table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered")->build();
         $abbrev_table_tbody = HtmlNode::get_builder("tbody")->build();
         $abbrev_table->addChildNode($abbrev_table_tbody);
         
@@ -333,61 +413,35 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
         echo $abbrev_table;
         
         ?>
-	
-	<h2>External references</h2>
+    </div>
+
+    <div class="col-sm-6">
+	<h3>External references</h3>
 	This testsuite is based upen the following documents:
         
         <?php
-            $ul = HtmlNode::get_builder("ul")->build();
+            $ul = HtmlNode::get_builder("div")->attribute("style", "margin-top: 15px;")->attribute("class", "list-group")->build();
             
             foreach ($external_references as $external_reference) {
-                $li = HtmlNode::get_builder("li")->build();
-                $a = HtmlNode::get_builder("a")->attribute("id", $external_reference->id)
+                $a = HtmlNode::get_builder("a")->attribute("class", "list-group-item")->attribute("id", $external_reference->id)
                         ->attribute("href", $external_reference->link)->s_attribute("title", $external_reference->name)
                         ->s_text($external_reference->name)->build();
-                $li->addChildNode($a);
-                $ul->addChildNode($li);
+                $ul->addChildNode($a);
             }
             
             echo $ul;
         ?>
-
-	<h1>Overview of Test-Suite-Structure</h1>
-<!--
-	<ol class="overview_ol">
-		<li>Negotiation of Forward-TSN-supported parameter</li>
-		<li>Sender Side Implementation</li>
-		<li>Receiver Side Implementation</li>
-		<li>Additional Policies</li>
-		<li>Corner cases and error conditions</li>
-	</ol>
--->
-
-	<?php
-        $ol = HtmlNode::get_builder("ol")->attribute("class", "overview_ol")->build();
-        foreach ($test_suites as $test_suite) {
-            $li = HtmlNode::get_builder("li")->s_text($test_suite->longName)->build();
-            $ol->addChildNode($li);
-
-            $ul = HtmlNode::get_builder("ul")->build();
-            foreach ($test_suite->test_cases as $test_case) {
-                $li_child = HtmlNode::get_builder("li")->build();
-                $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
-                $li_child->addChildNode($a_child);
-                $ul->addChildNode($li_child);
-            }
-            $li->addChildNode($ul);
-        }
-
-        echo $ol;
-		
-	?>
-	<h1>Definition of Test-Suite</h1>
         
-	<?php
-        foreach ($test_suites as $test_suite) {
-            echo $test_suite;
-        }
-        ?>
+    </div>
+
+        <div class="col-sm-12">
+            <h1>Definition of the Test-Cases</h1>
+
+            <?php
+            foreach ($test_suites as $test_suite) {
+                echo $test_suite;
+            }
+            ?>
+        </div>
   </body>
 </html>
