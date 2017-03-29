@@ -33,7 +33,8 @@ $abbreviations = array(
     new Abbreviation("TSN", "Transmission Sequence Number"),
     new Abbreviation("cwnd", "Congestion Window Size"),
     new Abbreviation("cum_tsn", "Cumulative Transmission Sequence Number"),
-    new Abbreviation("nr-gaps", "Non Renegable Gap Ack Blocks"),
+    new Abbreviation("gaps", "Gap Ackowledgement Blocks"),
+    new Abbreviation("nr-gaps", "Non Renegable Gap Ackowledgement Blocks"),
 );
 
 uasort($abbreviations, function ($a, $b) {
@@ -81,7 +82,8 @@ class Testsuite {
 
         foreach ($this->test_cases as $test_case) {
             $html .= $test_case;
-            $a = HtmlNode::get_builder("a")->attribute("href", "#overview")->s_text("Back to Testsuite-Overview")->build();
+            $a = HtmlNode::get_builder("a")->attribute("href", "#overview")->
+                    s_text("Back to Testsuite-Overview")->build();
             $html .= $a;
         }
 
@@ -101,7 +103,8 @@ class Testcase {
     }
     
     public function __toString() {
-        $table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered test_case_table")->attribute("id", $this->id)->build();
+        $table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered test_case_table")->
+                 attribute("id", $this->id)->build();
         $tbody = HtmlNode::get_builder("tbody")->build();
         $table->addChildNode($tbody);
         
@@ -201,12 +204,12 @@ $test_suites = array(
     new Testsuite("nftsp", "negotiation-forward-tsn-supported-parameter", "Negotiation of Forward-TSN-supported parameter"),
     new Testsuite("ssi", "sender-side-implementation", "Sender Side Implementation", 'These test cases use the term "abandoned" like defined in <a href="https://tools.ietf.org/html/rfc3758#section-3.4">RFC 3758 [section 3.4]</a>. 
                                     This means that these test cases have to be implemented for each specific policy rule that defines when a data chunk should be considered "abandoned" for the sender.'),
-	new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation", 'Please note that the packet-loss test-cases can be applied to ordered, unordered or an mixture of both DATA-Chunks. To avoid redundant definitions of equivalent loss patterns these descriptions are so generic that they can be applied to both ordered and unordered or an mixture of both.'),
-	new Testsuite("error-cases", "error-cases", "Error Cases"),
+    new Testsuite("rsi", "receiver-side-implementation", "Receiver Side Implementation", 'Please note that the packet-loss test-cases can be applied to ordered, unordered or an mixture of both DATA-Chunks. To avoid redundant definitions of equivalent loss patterns these descriptions are so generic that they can be applied to both ordered and unordered or an mixture of both.'),
+    new Testsuite("error-cases", "error-cases", "Error Cases"),
     new Testsuite("hwift", "handshake-with-i-forward-tsn", "Handshake with I-FORWARD-TSN"),
-	new Testsuite("hwnrs", "handshake-with-nr-sack", "Handshake with NR-SACK"),
-	new Testsuite("daswnrs", "data-sender", "Data Sender with NR-SACK"),
-	new Testsuite("darwnrs", "data-receiver", "Data Receiver with NR-SACK"),
+    new Testsuite("hwnrs", "handshake-with-nr-sack", "Handshake with NR-SACK"),
+    new Testsuite("daswnrs", "data-sender", "Data Sender with NR-SACK"),
+    new Testsuite("darwnrs", "data-receiver", "Data Receiver with NR-SACK"),
 );
 
 function sort_by_testcase_id($a, $b) {
@@ -216,17 +219,17 @@ function sort_by_testcase_id($a, $b) {
     preg_match_all($regex, $a->id, $matches_a);
     preg_match_all($regex, $b->id, $matches_b);
 
-	$test_case_name_a = $matches_a[1][0];
-	$test_case_name_b = $matches_b[1][0];
+    $test_case_name_a = $matches_a[1][0];
+    $test_case_name_b = $matches_b[1][0];
 
-	$test_case_id_a = $matches_a[2][0];
-	$test_case_id_b = $matches_b[2][0];
+    $test_case_id_a = $matches_a[2][0];
+    $test_case_id_b = $matches_b[2][0];
 
-	if ($test_case_name_a !== $test_case_name_b) {
-		return $test_case_name_a > $test_case_name_b;
-	} else {
-		return $test_case_id_a > $test_case_id_b;
-	}
+    if ($test_case_name_a !== $test_case_name_b) {
+        return $test_case_name_a > $test_case_name_b;
+    } else {
+        return $test_case_id_a > $test_case_id_b;
+    }
 }
 
 $all_test_cases = array();
@@ -343,56 +346,53 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
         </div>
 
 	<h2 id="overview">Overview of Test-Suite-Structure</h2>
-<!--
-	<ol class="overview_ol">
-		<li>Negotiation of Forward-TSN-supported parameter</li>
-		<li>Sender Side Implementation</li>
-		<li>Receiver Side Implementation</li>
-		<li>Additional Policies</li>
-		<li>Corner cases and error conditions</li>
-	</ol>
--->
-
 	<?php
-        $divs = array();
-        
-        foreach ($test_suites as $test_suite) {
-            $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-4")->build();
-            $panel_div = HtmlNode::get_builder("div")->attribute("class", "panel panel-default")->build();
-            $div->addChildNode($panel_div);
-            $heading_div = HtmlNode::get_builder("div")->attribute("class", "panel-heading")->build();
-            $body_div = HtmlNode::get_builder("div")->attribute("class", "panel-body")->build();
-            $panel_div->addChildNode($heading_div);
-            $panel_div->addChildNode($body_div);
-            $h3 = HtmlNode::get_builder("h3")->attribute("class", "panel-title")->s_text($test_suite->longName)->build();
-            $heading_div->addChildNode($h3);
+        function createTestsuiteListingDivs($test_suites) {
+            $divs = array();
 
-            $ul = HtmlNode::get_builder("ul")->build();
-            foreach ($test_suite->test_cases as $test_case) {
-                $li_child = HtmlNode::get_builder("li")->build();
-                $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
-                $li_child->addChildNode($a_child);
-                $ul->addChildNode($li_child);
+            foreach ($test_suites as $test_suite) {
+                $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-4")->build();
+                $panel_div = HtmlNode::get_builder("div")->attribute("class", "panel panel-default")->build();
+                $div->addChildNode($panel_div);
+                $heading_div = HtmlNode::get_builder("div")->attribute("class", "panel-heading")->build();
+                $body_div = HtmlNode::get_builder("div")->attribute("class", "panel-body")->build();
+                $panel_div->addChildNode($heading_div);
+                $panel_div->addChildNode($body_div);
+                $h3 = HtmlNode::get_builder("h3")->attribute("class", "panel-title")->s_text($test_suite->longName)->build();
+                $heading_div->addChildNode($h3);
+
+                $ul = HtmlNode::get_builder("ul")->build();
+                foreach ($test_suite->test_cases as $test_case) {
+                    $li_child = HtmlNode::get_builder("li")->build();
+                    $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
+                    $li_child->addChildNode($a_child);
+                    $ul->addChildNode($li_child);
+                }
+                $body_div->addChildNode($ul);
+
+                array_push($divs, $div);
             }
-            $body_div->addChildNode($ul);
             
-            array_push($divs, $div);
+            return $divs;
         }
         
-        $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
-        $i = 1;
-        foreach ($divs as $div) {
-            $outer_div->addChildNode($div);
-            
-            if (($i % 3) === 0) {
-                echo $outer_div;
-                $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+        function renderTestsuiteListing($divs) {
+            $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+            $i = 1;
+            foreach ($divs as $div) {
+                $outer_div->addChildNode($div);
+
+                if (($i % 3) === 0) {
+                    echo $outer_div;
+                    $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+                }
+                $i++;
             }
-            $i++;
+
+            echo $outer_div;
         }
-        
-        echo $outer_div;
-		
+
+        renderTestsuiteListing(createTestsuiteListingDivs($test_suites));
 	?>
     <div class="col-sm-6">
     <h3>Abbreviations</h3>
