@@ -1,15 +1,11 @@
 <?php
-require_once "config.php";
-ini_set('include_path', $includePath);
+require_once "./vendor/autoload.php";
 
-require_once "HtmlBuilder.php";
-require_once "Indentation.php";
+//\TheAomx\Nodes\Indentation::$indentationCharacter = " ";
+//\TheAomx\Nodes\Indentation::$indentationDepth = 2;
+//\TheAomx\Nodes\Indentation::$lineBreaker = "\n";
 
-//\Nodes\Indentation::$indentationCharacter = " ";
-//\Nodes\Indentation::$indentationDepth = 2;
-//\Nodes\Indentation::$lineBreaker = "\n";
-
-use \Nodes\HtmlNode as HtmlNode;
+use \TheAomx\Nodes\HtmlNode as HtmlNode;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
