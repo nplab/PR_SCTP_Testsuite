@@ -24,7 +24,7 @@
 // SUCH DAMAGE.
 //
 
---tolerance_usecs=750000
+--tolerance_usecs=20000
 
 #ifdef FreeBSD
  0.0 `sysctl -w net.inet.sctp.ecn_enable=0`
@@ -34,18 +34,18 @@
 +0.0 `sysctl -w net.inet.sctp.reconfig_enable=0`
 +0.0 `sysctl -w net.inet.sctp.nrsack_enable=0`
 +0.0 `sysctl -w net.inet.sctp.pktdrop_enable=0`
-// set rto_min and rto_initial to 1000ms for this test case
-+0.0 `sysctl -i net.inet.sctp.rto_min=1000`
-+0.0 `sysctl -i net.inet.sctp.rto_initial=1000`
+// set rto_min and rto_initial to 100ms for this test case
++0.0 `sysctl -i net.inet.sctp.rto_min=100`
++0.0 `sysctl -i net.inet.sctp.rto_initial=100`
 #endif
 
 #ifdef Linux
 // only enable PR-SCTP extension on Linux
  0.0 `sysctl -ew net.sctp.auth_enable=0`
 +0.0 `sysctl -ew net.sctp.prsctp_enable=1`
-// set rto_min and rto_initial to 1000ms for this test case
-+0.0 `sysctl -ew net.sctp.rto_min=1000`
-+0.0 `sysctl -ew net.sctp.rto_initial=1000`
+// set rto_min and rto_initial to 100ms for this test case
++0.0 `sysctl -ew net.sctp.rto_min=100`
++0.0 `sysctl -ew net.sctp.rto_initial=100`
 #endif
 
 +0.0 socket(..., SOCK_STREAM, IPPROTO_SCTP) = 3
@@ -87,28 +87,29 @@
 #ifdef Linux
 +0.0 > sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=..., os=..., is=..., tsn=1, STATE_COOKIE[len=..., val=...], FORWARD_TSN_SUPPORTED[]]
 #endif
-+0.1 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
++0.0 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4
 +0.0 close(3) = 0
 +0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
 +0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
++0.0 setsockopt(4, IPPROTO_SCTP, SCTP_RTOINFO, {srto_initial=100, srto_max=800, srto_min=100}, 16) = 0
 // Turn off the sending of HEARTBEATs.
 +0.0 setsockopt(4, IPPROTO_SCTP, SCTP_PEER_ADDR_PARAMS, {spp_address=..., spp_hbinterval=0, spp_pathmaxrxt=0, spp_pathmtu=0, spp_flags=SPP_HB_DISABLE|SPP_PMTUD_DISABLE, spp_ipv6_flowlabel=0, spp_dscp=0}, 152) = 0
 
 //sctp_sendmsg(int sd, const void * msg, size_t len, struct sockaddr *to, socklen_t tolen,
 //             uint32_t ppid, uint32_t flags, uint16_t stream_no, uint32_t timetolive, uint32_t context);
-+0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 500, 0) = 1000
++0.0 sctp_sendmsg(4, ..., 1000, ..., ..., htonl(1234), 0, 1, 50, 0) = 1000
 // send some data and dont sack it, to see if FORWARD_TSN is sent
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
-+1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
++0.1 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
-+0.0 sctp_sendmsg(4, ..., 2000, ..., ..., htonl(1234), 0, 1, 500, 0) = 2000
++0.0 sctp_sendmsg(4, ..., 2000, ..., ..., htonl(1234), 0, 1, 50, 0) = 2000
 +0.0 > sctp: DATA[flgs=B, len=1468, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=15000, gaps=[], dups=[]]
 +0.0 > sctp: DATA[flgs=E, len=564, tsn=3, sid=1, ssn=1, ppid=1234]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=2]
-+1.0 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,1}]]
++0.1 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,1}]]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=3]
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
