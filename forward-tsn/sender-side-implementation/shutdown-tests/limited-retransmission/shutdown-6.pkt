@@ -25,7 +25,7 @@
 //
 
 
---tolerance_usecs=750000
+--tolerance_usecs=80000
 
 #ifdef FreeBSD
  0.0 `sysctl -w net.inet.sctp.ecn_enable=0`
@@ -35,12 +35,18 @@
 +0.0 `sysctl -w net.inet.sctp.reconfig_enable=0`
 +0.0 `sysctl -w net.inet.sctp.nrsack_enable=0`
 +0.0 `sysctl -w net.inet.sctp.pktdrop_enable=0`
+// set rto_min and rto_initial to 100ms for this test case
++0.0 `sysctl -i net.inet.sctp.rto_min=100`
++0.0 `sysctl -i net.inet.sctp.rto_initial=100`
 #endif
 
 #ifdef Linux
 // only enable PR-SCTP extension on Linux
  0.0 `sysctl -ew net.sctp.auth_enable=0`
 +0.0 `sysctl -ew net.sctp.prsctp_enable=1`
+// set rto_min and rto_initial to 100ms for this test case
++0.0 `sysctl -ew net.sctp.rto_min=100`
++0.0 `sysctl -ew net.sctp.rto_initial=100
 #endif
 
 
@@ -83,16 +89,17 @@
 #ifdef Linux
 +0.0 > sctp: INIT_ACK[flgs=0, tag=2, a_rwnd=..., os=..., is=..., tsn=1, STATE_COOKIE[len=..., val=...], FORWARD_TSN_SUPPORTED[]]
 #endif
-+0.1 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
++0.0 < sctp: COOKIE_ECHO[flgs=0, len=..., val=...]
 +0.0 > sctp: COOKIE_ACK[flgs=0]
 +0.0 accept(3, ..., ...) = 4
 +0.0 close(3) = 0
 +0.0 fcntl(4, F_GETFL) = 0x2 (flags O_RDWR)
 +0.0 fcntl(4, F_SETFL, O_RDWR|O_NONBLOCK) = 0
++0.0 setsockopt(4, IPPROTO_SCTP, SCTP_RTOINFO, {srto_initial=100, srto_max=800, srto_min=100}, 16) = 0
 
 //sctp_sendv(int sd, const struct iovec *iov, int iovcnt, struct sockaddr *addrs, int addrcnt, void *info, socklen_t infolen, unsigned int infotype, int flags);
 
-+1.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
++0.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
                     {sendv_flags=SCTP_SEND_SNDINFO_VALID|SCTP_SEND_PRINFO_VALID,
                      sendv_sndinfo={snd_sid=1, snd_flags=0, snd_ppid=htonl(1234), snd_context=0, snd_assoc_id=0},
                      sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=0},
@@ -100,9 +107,9 @@
 
 // send some data and dont sack it, to see if FORWARD_TSN is sent
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=1, sid=1, ssn=0, ppid=1234]
-+1.0 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
++0.1 > sctp: FORWARD_TSN[cum_tsn=1, ids=[{1,0}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=1, a_rwnd=10000, gaps=[], dups=[]]
-+1.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
++0.0 sctp_sendv(4, [{..., 1000}], 1, ..., 1, 
                     {sendv_flags=SCTP_SEND_SNDINFO_VALID|SCTP_SEND_PRINFO_VALID,
                      sendv_sndinfo={snd_sid=1, snd_flags=0, snd_ppid=htonl(1234), snd_context=0, snd_assoc_id=0},
                      sendv_prinfo={pr_policy=SCTP_PR_SCTP_RTX, pr_value=2},
@@ -110,9 +117,9 @@
 +0.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 // disable further send operations with shutdown
 +0.0 shutdown(4, SHUT_WR) = 0
-+2.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
-+4.0 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
-+8.0 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
++0.2 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
++0.4 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
++0.8 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.0 < sctp: SHUTDOWN_ACK[flgs=0]
