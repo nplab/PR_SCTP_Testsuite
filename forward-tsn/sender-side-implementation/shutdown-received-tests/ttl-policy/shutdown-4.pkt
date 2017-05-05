@@ -109,7 +109,7 @@
 +0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=15000, gaps=[], dups=[]]
 +0.0 > sctp: DATA[flgs=E, len=564, tsn=3, sid=1, ssn=1, ppid=1234]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=2]
-+0.1 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,1}]]
++0.2 > sctp: FORWARD_TSN[cum_tsn=3, ids=[{1,1}]]
 +0.0 < sctp: SHUTDOWN[flgs=0, cum_tsn=3]
 +0.0 > sctp: SHUTDOWN_ACK[flgs=0]
 +0.0 < sctp: SHUTDOWN_COMPLETE[flgs=0]
