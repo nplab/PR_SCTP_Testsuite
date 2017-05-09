@@ -27,4 +27,4 @@ overcoming this limitation and adding support for SCTP and UDPLite.
 * [process fwd tsn chunk only when prsctp is enabled](https://patchwork.ozlabs.org/patch/723509/)
 
 ## References
-* [Formal definition of test cases](https://xdcc.fallout-hq.de/spec/)
+* [Formal definition of test cases](https://nplab.github.io/PR_SCTP_Testsuite/)
