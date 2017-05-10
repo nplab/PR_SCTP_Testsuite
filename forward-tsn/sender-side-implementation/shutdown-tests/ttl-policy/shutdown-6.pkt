@@ -28,13 +28,15 @@
 --tolerance_usecs=60000
 
 #ifdef FreeBSD
- 0.0 `sysctl -w net.inet.sctp.ecn_enable=0`
-+0.0 `sysctl -w net.inet.sctp.pr_enable=1`
-+0.0 `sysctl -w net.inet.sctp.asconf_enable=0`
-+0.0 `sysctl -w net.inet.sctp.auth_enable=0`
-+0.0 `sysctl -w net.inet.sctp.reconfig_enable=0`
-+0.0 `sysctl -w net.inet.sctp.nrsack_enable=0`
-+0.0 `sysctl -w net.inet.sctp.pktdrop_enable=0`
+ 0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
++0.0 `sysctl -i net.inet.sctp.pr_enable=1`
++0.0 `sysctl -i net.inet.sctp.asconf_enable=0`
++0.0 `sysctl -i net.inet.sctp.pktdrop_enable=0`
++0.0 `sysctl -i net.inet.sctp.reconfig_enable=0`
++0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
 // set rto_min and rto_initial to 100ms for this test case
 +0.0 `sysctl -i net.inet.sctp.rto_min=100`
 +0.0 `sysctl -i net.inet.sctp.rto_initial=100`
@@ -114,7 +116,7 @@
 +0.0 shutdown(4, SHUT_WR) = 0
 +0.2 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
 +0.4 > sctp: DATA[flgs=BE, len=1016, tsn=2, sid=1, ssn=1, ppid=1234]
-+0.8 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,1}]]
++0.8 > sctp: FORWARD_TSN[cum_tsn=2, ids=[{1,0}]]
 +0.0 < sctp: SACK[flgs=0, cum_tsn=2, a_rwnd=10000, gaps=[], dups=[]]
 +0.0 > sctp: SHUTDOWN[flgs=0, cum_tsn=0]
 +0.0 < sctp: SHUTDOWN_ACK[flgs=0]
