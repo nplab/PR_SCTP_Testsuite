@@ -27,13 +27,15 @@
 --tolerance_usecs=20000
 
 #ifdef FreeBSD
- 0.0 `sysctl -w net.inet.sctp.ecn_enable=0`
-+0.0 `sysctl -w net.inet.sctp.pr_enable=1`
-+0.0 `sysctl -w net.inet.sctp.asconf_enable=0`
-+0.0 `sysctl -w net.inet.sctp.auth_enable=0`
-+0.0 `sysctl -w net.inet.sctp.reconfig_enable=0`
-+0.0 `sysctl -w net.inet.sctp.nrsack_enable=0`
-+0.0 `sysctl -w net.inet.sctp.pktdrop_enable=0`
+ 0.0 `sysctl -i net.inet.sctp.ecn_enable=0`
++0.0 `sysctl -i net.inet.sctp.pr_enable=1`
++0.0 `sysctl -i net.inet.sctp.asconf_enable=0`
++0.0 `sysctl -i net.inet.sctp.pktdrop_enable=0`
++0.0 `sysctl -i net.inet.sctp.reconfig_enable=0`
++0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nrsack_enable=0`  // FreeBSD 11 and higher
++0.0 `sysctl -i net.inet.sctp.nrsack_on_off=0`  // FreeBSD 9.x and 10.x
 // set rto_min and rto_initial to 100ms for this test case
 +0.0 `sysctl -i net.inet.sctp.rto_min=100`
 +0.0 `sysctl -i net.inet.sctp.rto_initial=100`
