@@ -6,5 +6,5 @@
 | [Data Receiver](data-receiver/README.md)                                               |                       22 | Done          |
 | [Data Sender](data-sender/README.md)                                                   |                       16 | Done          |
 | [Data (D)](sctp-d-tests/README.md)                                                     |                       11 | Done          |
-| [Tests with Forward-TSN](with-forward-tsn/README.md)                                   |                        5 | In Progress   |
-| [Error Cases](error-cases/README.md)                                                   |                       15 | In Progress   |
+| [Tests with Forward-TSN](with-forward-tsn/README.md)                                   |                        5 | Done   |
+| [Error Cases](error-cases/README.md)                                                   |                       19 | Done   |
