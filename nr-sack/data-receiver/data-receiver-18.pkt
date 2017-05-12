@@ -35,7 +35,7 @@
 +0.0 `sysctl -i net.inet.sctp.auth_enable=0`    // FreeBSD 11 and higher
 +0.0 `sysctl -i net.inet.sctp.auth_disable=1`   // FreeBSD 9.x and 10.x
 +0.0 `sysctl -i net.inet.sctp.nrsack_enable=1`  // FreeBSD 11 and higher
-+0.0 `sysctl -i net.inet.sctp.nrsack_on_off=1`  // FreeBSD 9.x and 10.x
++0.0 `sysctl -i net.inet.sctp.nr_sack_on_off=1`  // FreeBSD 9.x and 10.x
 +0.0 `sysctl -i net.inet.sctp.do_sctp_drain=0`
 #endif
 
