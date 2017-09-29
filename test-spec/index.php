@@ -93,8 +93,8 @@ class Testcase {
     
     private function build_tr_row ($name, $value) {
         $tr = HtmlNode::get_builder("tr")->build();
-        $tr->addChildNode(HtmlNode::get_builder("td")->text($name)->build());
-        $tr->addChildNode(HtmlNode::get_builder("td")->text($value)->build());
+        $tr->append(HtmlNode::get_builder("td")->text($name)->build())->
+             append(HtmlNode::get_builder("td")->text($value)->build());
         return $tr;
     }
     
@@ -102,17 +102,17 @@ class Testcase {
         $table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered test_case_table")->
                  attribute("id", $this->id)->build();
         $tbody = HtmlNode::get_builder("tbody")->build();
-        $table->addChildNode($tbody);
+        $table->append($tbody);
         
         $tr_id = $this->build_tr_row("ID", $this->id);
         $tr_precondition = $this->build_tr_row("Precondition", $this->precondition);
         $tr_purpose = $this->build_tr_row("Purpose", $this->purpose);
         $tr_references = $this->build_tr_row("References", $this->references);
 
-        $tbody->addChildNode($tr_id);
-        $tbody->addChildNode($tr_precondition);
-        $tbody->addChildNode($tr_purpose);
-        $tbody->addChildNode($tr_references);
+        $tbody->append($tr_id)->
+                append($tr_precondition)->
+                append($tr_purpose)->
+                append($tr_references);
 
         return strval($table);
     }
@@ -352,19 +352,18 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
                 $div->addChildNode($panel_div);
                 $heading_div = HtmlNode::get_builder("div")->attribute("class", "panel-heading")->build();
                 $body_div = HtmlNode::get_builder("div")->attribute("class", "panel-body")->build();
-                $panel_div->addChildNode($heading_div);
-                $panel_div->addChildNode($body_div);
+                $panel_div->append($heading_div)->append($body_div);
                 $h3 = HtmlNode::get_builder("h3")->attribute("class", "panel-title")->s_text($test_suite->longName)->build();
-                $heading_div->addChildNode($h3);
+                $heading_div->append($h3);
 
                 $ul = HtmlNode::get_builder("ul")->build();
                 foreach ($test_suite->test_cases as $test_case) {
                     $li_child = HtmlNode::get_builder("li")->build();
                     $a_child = HtmlNode::get_builder("a")->attribute("href", "#" . $test_case->id)->s_text($test_case->id)->build();
-                    $li_child->addChildNode($a_child);
-                    $ul->addChildNode($li_child);
+                    $li_child->append($a_child);
+                    $ul->append($li_child);
                 }
-                $body_div->addChildNode($ul);
+                $body_div->append($ul);
 
                 array_push($divs, $div);
             }
@@ -373,14 +372,14 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
         }
         
         function renderTestsuiteListing($divs) {
-            $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+            $outer_div = $div = HtmlNode::get_builder("div")->attr("class", "col-sm-12")->build();
             $i = 1;
             foreach ($divs as $div) {
-                $outer_div->addChildNode($div);
+                $outer_div->append($div);
 
                 if (($i % 3) === 0) {
                     echo $outer_div;
-                    $outer_div = $div = HtmlNode::get_builder("div")->attribute("class", "col-sm-12")->build();
+                    $outer_div = $div = HtmlNode::get_builder("div")->attr("class", "col-sm-12")->build();
                 }
                 $i++;
             }
@@ -393,17 +392,16 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
     <div class="col-sm-6">
     <h3>Abbreviations</h3>
         <?php
-        $abbrev_table = HtmlNode::get_builder("table")->attribute("class", "table table-bordered")->build();
+        $abbrev_table = HtmlNode::get_builder("table")->attr("class", "table table-bordered")->build();
         $abbrev_table_tbody = HtmlNode::get_builder("tbody")->build();
-        $abbrev_table->addChildNode($abbrev_table_tbody);
+        $abbrev_table->append($abbrev_table_tbody);
         
         foreach ($abbreviations as $abbreviation) {
             $tr = HtmlNode::get_builder("tr")->build();
             $td1 = HtmlNode::get_builder("td")->s_text($abbreviation->abbreviation)->build();
             $td2 = HtmlNode::get_builder("td")->s_text($abbreviation->long_description)->build();
-            $tr->addChildNode($td1);
-            $tr->addChildNode($td2);
-            $abbrev_table_tbody->addChildNode($tr);
+            $tr->append($td1)->append($td2);
+            $abbrev_table_tbody->append($tr);
         }
         
         echo $abbrev_table;
@@ -416,13 +414,13 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
 	This testsuite is based upen the following documents:
         
         <?php
-            $ul = HtmlNode::get_builder("div")->attribute("style", "margin-top: 15px;")->attribute("class", "list-group")->build();
+            $ul = HtmlNode::get_builder("div")->attr("style", "margin-top: 15px;")->attr("class", "list-group")->build();
             
             foreach ($external_references as $external_reference) {
-                $a = HtmlNode::get_builder("a")->attribute("class", "list-group-item")->attribute("id", $external_reference->id)
-                        ->attribute("href", $external_reference->link)->s_attribute("title", $external_reference->name)
+                $a = HtmlNode::get_builder("a")->attr("class", "list-group-item")->attr("id", $external_reference->id)
+                        ->attr("href", $external_reference->link)->s_attribute("title", $external_reference->name)
                         ->s_text($external_reference->name)->build();
-                $ul->addChildNode($a);
+                $ul->append($a);
             }
             
             echo $ul;
