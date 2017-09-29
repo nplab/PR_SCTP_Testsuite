@@ -7,10 +7,9 @@ Arrange the data at the tester that an I-FORWARD-TSN chunk is sent to the IUT.
 
 Purpose:
 Ensure that the IUT upon receipt of an I-FORWARD-TSN chunk at an association where the User Message Interleaving extension is not enabled 
-sends an ERROR-Chunk where any cause is considered valid. Unrecognized chunk type would be an reasonable cause.
+sends an ABORT-Chunk where the ABORT-Chunk may include the protocol violation error cause.
 
 References:
-<span class="todo">Needs clarification in the internet draft</span>
 
 <a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>

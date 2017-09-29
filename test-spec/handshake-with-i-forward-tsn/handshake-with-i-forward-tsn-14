@@ -12,7 +12,6 @@ Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Int
 therefore uses FORWARD-TSN- and DATA-Chunks.
 
 References:
-<span class="todo">Needs clarification in the internet draft</span>
 
 <a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
