@@ -131,12 +131,14 @@ The tester responds with an INIT-ACK where the forward-tsn-supported parameter i
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an INIT-ACK-chunk with a forward-tsn-supported parameter sends an ERROR-Chunk 
 with the cause "invalid mandatory parameter".
 </td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3">RFC 4960 [section 3.3.3]</a>
-</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-4"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-4</td></tr><tr><td>Precondition</td><td>Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is NOT set.
+</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-4"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-4</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP.
+Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is NOT set.
 Arrange the data at the tester that an FORWARD TSN chunk is sent to the IUT.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an FORWARD TSN chunk at an association where PR-SCTP is not supported sends an ERROR-Chunk 
 where any cause is considered valid. Protocol violation would be an reasonable cause.
 </td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3">RFC 4960 [section 3.3.3]</a>
-</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-5"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-5</td></tr><tr><td>Precondition</td><td>Association is established between tester and IUT, where in the INIT-ACK-Chunk sent by the tester the forward-tsn-supported parameter is NOT set.
+</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-5"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-5</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP.
+Association is established between tester and IUT, where in the INIT-ACK-Chunk sent by the tester the forward-tsn-supported parameter is NOT set.
 Arrange the data at the tester that an FORWARD TSN chunk is sent to the IUT.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an FORWARD TSN chunk at an association where PR-SCTP is not supported sends an ERROR-Chunk 
 where any cause is considered valid. Protocol violation would be an reasonable cause.
@@ -900,10 +902,9 @@ with the cause "invalid mandatory parameter".
 Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is NOT set
 and the FORWARD-TSN and the I-FORWARD-TSN-Chunk are NOT listed at the supported extensions parameter.
 Arrange the data at the tester that an I-FORWARD-TSN chunk is sent to the IUT.
-</td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an I-FORWARD-TSN chunk at an association where PR-SCTP is not supported sends an ERROR-Chunk 
-where any cause is considered valid. Protocol violation would be an reasonable cause.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an I-FORWARD-TSN chunk at an association where PR-SCTP is not supported sends an ABORT-Chunk 
+where the ABORT-Chunk may include the protocol violation error cause.
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-5"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-5</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is set
@@ -911,9 +912,8 @@ and the FORWARD-TSN and the I-FORWARD-TSN-Chunk are listed at the supported exte
 Make sure that the IUT has not enabled the User Message Interleaving extension.
 Arrange the data at the tester that an I-FORWARD-TSN chunk is sent to the IUT.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT upon receipt of an I-FORWARD-TSN chunk at an association where the User Message Interleaving extension is not enabled 
-sends an ERROR-Chunk where any cause is considered valid. Unrecognized chunk type would be an reasonable cause.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+sends an ABORT-Chunk where the ABORT-Chunk may include the protocol violation error cause.
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-6"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-6</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is set
@@ -938,8 +938,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-9"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-9</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is set
@@ -948,8 +947,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-10"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-10</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT, where in the INIT-Chunk sent by the tester the forward-tsn-supported parameter is set
@@ -958,8 +956,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-11"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-11</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT.
@@ -990,8 +987,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-14"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-14</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT.
@@ -1002,8 +998,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><table class="table table-bordered test_case_table" id="handshake-with-i-forward-tsn-15"><tbody><tr><td>ID</td><td>handshake-with-i-forward-tsn-15</td></tr><tr><td>Precondition</td><td>IUT supports PR-SCTP and the Stream Schedulers and User Message Interleaving extension.
 Association is established between tester and IUT.
@@ -1014,8 +1009,7 @@ Make sure that the IUT has enabled the User Message Interleaving extension.
 Let the IUT send one ordered unreliable DATA-Chunk to the tester.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT has enabled PR-SCTP and has not enabled the User Message Interleaving extension for this association and
 therefore uses FORWARD-TSN- and DATA-Chunks.
-</td></tr><tr><td>References</td><td><span class="todo">Needs clarification in the internet draft</span>
-<a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
+</td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/rfc3758#section-3.3.2">RFC 3758 [section 3.3.2]</a>, <a href="https://tools.ietf.org/html/rfc4960#section-3.3.3.1">RFC 4960 [section 3.3.3.1]</a>,
 <a href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-09#page-9">Stream Schedulers and User Message Interleaving for SCTP [section 2.3.1]</a>
 </td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a><h2>Handshake with NR-SACK</h2><table class="table table-bordered test_case_table" id="handshake-with-nr-sack-1"><tbody><tr><td>ID</td><td>handshake-with-nr-sack-1</td></tr><tr><td>Precondition</td><td>IUT does not support the NR-SACK extension. 
 Association is not established between tester and IUT.
