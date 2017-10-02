@@ -312,6 +312,10 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
             .todo {
                     color: red;
             }
+            
+            .footer {
+                text-align: center;
+            }
 
             a {
                     color: blue;
@@ -319,6 +323,7 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
     </style>
     </head>
     <body>
+        <div class="container">
         <h1>Test-Suite for the SCTP Partial Reliability Extension</h1>
         
 	<h2>Introduction</h2>
@@ -428,14 +433,21 @@ uasort($test_suites[7]->test_cases, "sort_by_testcase_id");
         
     </div>
 
-        <div class="col-sm-12">
-            <h1>Definition of the Test-Cases</h1>
+    <div class="col-sm-12">
+        <h1>Definition of the Test-Cases</h1>
 
-            <?php
-            foreach ($test_suites as $test_suite) {
-                echo $test_suite;
-            }
-            ?>
-        </div>
+        <?php
+        foreach ($test_suites as $test_suite) {
+            echo $test_suite;
+        }
+        ?>
+    </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+          <p class="text-muted">&copy; 2017 by Julian Cordes</p>
+      </div>
+    </footer>
   </body>
 </html>

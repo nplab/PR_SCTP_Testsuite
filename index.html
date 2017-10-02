@@ -69,6 +69,10 @@
             .todo {
                     color: red;
             }
+            
+            .footer {
+                text-align: center;
+            }
 
             a {
                     color: blue;
@@ -76,6 +80,7 @@
     </style>
     </head>
     <body>
+        <div class="container">
         <h1>Test-Suite for the SCTP Partial Reliability Extension</h1>
         
 	<h2>Introduction</h2>
@@ -110,10 +115,10 @@
         <div style="margin-top: 15px;" class="list-group"><a class="list-group-item" id="rfc4960" href="https://tools.ietf.org/html/rfc4960" title="RFC 4960 (SCTP)">RFC 4960 (SCTP)</a><a class="list-group-item" id="rfc3758" href="https://www.ietf.org/rfc/rfc3758.txt" title="RFC 3758 (PR-SCTP)">RFC 3758 (PR-SCTP)</a><a class="list-group-item" id="rfc6458" href="https://www.ietf.org/rfc/rfc6458.txt" title="RFC 6458 (Sockets API Extensions for SCTP)">RFC 6458 (Sockets API Extensions for SCTP)</a><a class="list-group-item" id="rfc7496" href="https://www.ietf.org/rfc/rfc7496.txt" title="RFC 7496 (Additional Policies for SCTP)">RFC 7496 (Additional Policies for SCTP)</a><a class="list-group-item" id="ndata05" href="https://tools.ietf.org/html/draft-ietf-tsvwg-sctp-ndata-05" title="Internet Draft - Stream Schedulers and User Message Interleaving for SCTP">Internet Draft - Stream Schedulers and User Message Interleaving for SCTP</a><a class="list-group-item" id="loadsharing" href="https://tools.ietf.org/html/draft-tuexen-tsvwg-sctp-multipath-05" title="Internet Draft - Load Sharing for SCTP">Internet Draft - Load Sharing for SCTP</a></div>        
     </div>
 
-        <div class="col-sm-12">
-            <h1>Definition of the Test-Cases</h1>
+    <div class="col-sm-12">
+        <h1>Definition of the Test-Cases</h1>
 
-            <h2>Negotiation of Forward-TSN-supported parameter</h2><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-1"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-1</td></tr><tr><td>Precondition</td><td>IUT does not support PR-SCTP. 
+        <h2>Negotiation of Forward-TSN-supported parameter</h2><table class="table table-bordered test_case_table" id="handshake-with-forward-tsn-1"><tbody><tr><td>ID</td><td>handshake-with-forward-tsn-1</td></tr><tr><td>Precondition</td><td>IUT does not support PR-SCTP. 
 Association is not established between tester and IUT.
 Arrange the data at the tester such that an INIT-Chunk with a forward-tsn-supported parameter is sent to the IUT.
 </td></tr><tr><td>Purpose</td><td>Ensure that the IUT responds with an INIT-ACK-chunk where the forward-tsn-supported parameter is listed at the 
@@ -1439,7 +1444,14 @@ Then also verify that the fragmented user message is delivered and that the not 
 before the fragmented ordered user message to the userland.
 </td></tr><tr><td>References</td><td><a href="https://tools.ietf.org/html/draft-tuexen-tsvwg-sctp-multipath-13#section-4.4.1">Load Sharing for SCTP [section 4.4.1]</a>,
 <a href="https://tools.ietf.org/html/rfc4960#section-6.2">RFC 4960 [section 6.2]</a>
-</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a>        </div>
+</td></tr></tbody></table><a href="#overview">Back to Testsuite-Overview</a>    </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+          <p class="text-muted">&copy; 2017 by Julian Cordes</p>
+      </div>
+    </footer>
   </body>
 </html>
 
